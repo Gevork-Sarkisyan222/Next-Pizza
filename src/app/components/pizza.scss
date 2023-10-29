@@ -1,0 +1,132 @@
+.selected-size-black {
+  transition: 300ms;
+  background-color: #fe5f1e !important;
+  color: black;
+}
+
+.PizzaCard {
+  display: flex;
+  flex-direction: column;
+  width: 297px;
+
+  .pizza-img-title {
+    text-align: center;
+
+    h1 {
+      color: #000;
+      text-align: center;
+      font-family: 'proxima-nova', sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: normal;
+      letter-spacing: 0.2px;
+    }
+
+    img {
+      width: 260px;
+      height: 260px;
+
+      &:hover {
+        transition: 1s;
+        transform: translateY(20px);
+      }
+    }
+  }
+
+  .select-size {
+    width: 280px;
+    height: 85px;
+    border-radius: 10px;
+    background: #f3f3f3;
+    display: flex;
+    padding: 5px;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    button {
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.384);
+      border: none;
+      color: #2c2c2c;
+      text-align: center;
+      font-family: 'proxima-nova', sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      cursor: pointer;
+      letter-spacing: 0.21px;
+      width: 131.877px;
+      height: 32px;
+    }
+
+    button:nth-last-child(-n + 3) {
+      width: 86.007px;
+      height: 32px;
+    }
+  }
+
+  .price-button {
+    display: flex;
+    gap: 36px;
+
+    h1 {
+      color: #000;
+      font-family: 'proxima-nova', sans-serif;
+      font-size: 22px;
+      font-style: normal;
+      margin-top: 17px;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 0.33px;
+    }
+
+    button {
+      margin-top: 12px;
+      width: 132px;
+      height: 40px;
+      border-radius: 30px;
+      border: 1px solid #eb5a1e;
+      background: #eb5a1e;
+      color: white;
+      font-family: 'proxima-nova', sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      margin-left: 28px;
+      line-height: normal;
+      cursor: pointer;
+
+      .button-content {
+        margin-top: -9px;
+        margin-left: -16px;
+        height: 70px;
+        width: 150px;
+
+        img {
+          width: 25px;
+          height: 25px;
+          position: relative;
+          top: 14px;
+          left: -3px;
+        }
+
+        span {
+          margin-top: -50px;
+          position: relative;
+          top: 7px;
+        }
+      }
+
+      &:hover {
+        background: #eb5a1e;
+        color: white;
+      }
+
+      &:active {
+        transform: translateY(5px);
+      }
+    }
+  }
+}

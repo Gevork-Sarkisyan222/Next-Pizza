@@ -1,0 +1,82 @@
+.Cart-Card {
+  .cart-card-content {
+    display: flex;
+    gap: 265px;
+
+    .prop-container {
+      display: flex;
+      gap: 15px;
+
+      img {
+        width: 80px;
+        height: 80px;
+      }
+
+      h1 {
+        color: #000;
+        font-family: 'proxima-nova', sans-serif;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.22px;
+      }
+
+      p {
+        color: #8d8d8d;
+        margin-top: 42px;
+        margin-left: -165px;
+        margin-top: 49px;
+        font-family: 'proxima-nova', sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.18px;
+      }
+    }
+
+    .icons {
+      display: flex;
+      gap: 20px;
+      margin-left: 10px;
+      position: relative;
+      left: -81px;
+      top: 21px;
+
+      .number-count {
+        color: #000;
+        margin-top: 4px;
+        font-family: 'proxima-nova', sans-serif;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.22px;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+    }
+
+    .money-text {
+      h2 {
+        margin-left: -260px;
+        font-style: normal;
+        font-weight: 700;
+      }
+    }
+    .remove-icon {
+      margin-left: -387px;
+      margin-top: 18px;
+      img {
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+      }
+    }
+  }
+}
