@@ -1,4 +1,5 @@
 body {
+  font-family: 'proxima-nova', sans-serif;
   // background-color: rgb(255, 223, 140);
   background-image: url('https://img.freepik.com/premium-vector/seamless-pattern-with-classical-italian-foods_80590-1174.jpg?w=740');
 }
@@ -135,6 +136,7 @@ body {
 }
 
 .close-icon {
+  display: none;
   width: 76px;
   height: 40px;
   background-color: #eaeaea;

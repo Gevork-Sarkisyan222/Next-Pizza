@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addCart, removeCart } from '../redux/slices/cart.slice';
 import { setCheckedTrue, setCheckedFalse } from '../redux/slices/checked.slice';
 import { RootState } from '../redux/store';
+import Image from 'next/image';
 
 interface pizzaProps {
   id: number;
@@ -82,7 +83,7 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
     <>
       <div className="PizzaCard">
         <div className="pizza-img-title">
-          <img src={image} alt="pizza" />
+          <Image width={1} height={1} src={image} alt="pizza" />
           <h1>{title}</h1>
         </div>
         <div className="select-size">
@@ -119,7 +120,9 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
             {checked ? (
               <section onClick={removeFromCart}>
                 <div className="button-content">
-                  <img
+                  <Image
+                    width={1}
+                    height={1}
                     src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/checkmark.png"
                     alt="checkmark"
                   />
@@ -129,7 +132,9 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
             ) : (
               <section onClick={handleAddToCart}>
                 <div className="button-content">
-                  <img
+                  <Image
+                    width={1}
+                    height={1}
                     src="https://img.icons8.com/ios-filled/50/FFFFFF/plus-math.png"
                     alt="plus-math"
                   />

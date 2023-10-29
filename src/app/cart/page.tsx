@@ -10,6 +10,7 @@ import { RootState } from '../redux/slices/types/cartType';
 import { pizzas } from '../redux/slices/cart.slice';
 import { clearCart } from '../redux/slices/cart.slice';
 import { clearAllChecked } from '../redux/slices/checked.slice';
+import Image from 'next/image';
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.cart);
@@ -44,7 +45,10 @@ const Cart = () => {
               на главную страницу.
             </p>
             <div className="img-and-button">
-              <img
+              <Image
+                width={550}
+                height={450}
+                className="empty-cart-icon"
                 src="https://cdni.iconscout.com/illustration/free/thumb/free-empty-cart-4085814-3385483.png"
                 alt="empty-cart"
               />
@@ -61,11 +65,6 @@ const Cart = () => {
       <>
         <div className="cart-container">
           <h1 className="title-cart">Корзина</h1>
-          {/* <img
-            className="clear-icon"
-            src="https://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911651trashcan.png"
-            alt=""
-          /> */}
           <h3 onClick={handleClearCart}>🗑️Очистить корзину</h3>
           <div className="line-for-cart"></div>
         </div>
