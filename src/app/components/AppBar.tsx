@@ -102,8 +102,8 @@ const AppBar: React.FC<AppBarProps> = ({
       <div className="AppBar">
         <section className="app-bar-content">
           <Image
-            width={555}
-            height={555}
+            width={100}
+            height={100}
             src="https://s3-alpha-sig.figma.com/img/4de5/7236/f9f670697fd9287efa7cab2cffff922e?Expires=1698624000&Signature=qvpkzngEDkEGboh0fw2TLaQPHr1HaV~BCcvJ~1Qa4XFm6OqhIeo-VHK9xRQQo4~antp6KdS7NY~l5e-u6ajmH3CNeZoPeZpCbVNX7SCCtnCuGieI3ZtiRnzwsPgA1u7PbFrTYTtf5BIoaVnjlcE94Lclki4KCMXfBqqN~DCJB3Tw1zZW4Xm~vIjA5bER96LNNwyZlD6mnQ5nSKCRQqPD5e0NlHYH9a6xsrXbvtGss0xgvZ~QXG2zTFlmIGLNi4mOENClHYnz5Pl2jAfVpW1PK7N44E-8sSilbUHF4hIxzZd8jfdQlBC-0bcoeex7~dczBc5RZTYrbcjxjLFnVIAm0w__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
             alt="app image"
           />

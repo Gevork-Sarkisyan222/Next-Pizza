@@ -83,7 +83,7 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
     <>
       <div className="PizzaCard">
         <div className="pizza-img-title">
-          <Image width={1} height={1} src={image} alt="pizza" />
+          <Image width={260} height={260} src={image} alt="pizza" />
           <h1>{title}</h1>
         </div>
         <div className="select-size">
@@ -121,8 +121,8 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
               <section onClick={removeFromCart}>
                 <div className="button-content">
                   <Image
-                    width={1}
-                    height={1}
+                    width={100}
+                    height={100}
                     src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/checkmark.png"
                     alt="checkmark"
                   />
@@ -133,8 +133,8 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
               <section onClick={handleAddToCart}>
                 <div className="button-content">
                   <Image
-                    width={1}
-                    height={1}
+                    width={100}
+                    height={100}
                     src="https://img.icons8.com/ios-filled/50/FFFFFF/plus-math.png"
                     alt="plus-math"
                   />

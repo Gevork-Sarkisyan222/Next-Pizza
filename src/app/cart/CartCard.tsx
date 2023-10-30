@@ -41,7 +41,7 @@ const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
     <div className="Cart-Card">
       <div className="cart-card-content">
         <div className="prop-container">
-          <Image width={260} height={260} src={image} alt="pizzas-image" />
+          <Image width={500} height={500} src={image} alt="pizzas-image" />
           <h1>{title}</h1>
           {/* <p>тонкое тесто, 26 см.</p> */}
         </div>

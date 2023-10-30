@@ -3,7 +3,6 @@ const nextConfig = {
   images: {
     domains: [
       'cdni.iconscout.com',
-      's3-alpha-sig.figma.com',
       'encrypted-tbn0.gstatic.com',
       'upload.wikimedia.org',
       'encrypted-tbn0.gstatic.com',
@@ -13,6 +12,7 @@ const nextConfig = {
       'dodopizza-a.akamaihd.net',
       'react-pizza-v2-psi.vercel.app',
       'c8.alamy.com',
+      's3-alpha-sig.figma.com',
     ],
   },
 };
