@@ -6,7 +6,8 @@ interface CheckedState {
   [id: number]: boolean;
 }
 
-const storedData = localStorage.getItem('checkedState');
+const isBrowser = typeof window !== 'undefined'; // Проверяем, запущено ли в браузере
+const storedData = isBrowser ? localStorage.getItem('checkedState') : null;
 const initialState: CheckedState = storedData ? JSON.parse(storedData) : {};
 
 const checkedSlice = createSlice({
@@ -16,18 +17,18 @@ const checkedSlice = createSlice({
     setCheckedTrue(state, action: PayloadAction<{ id: number }>) {
       const { id } = action.payload;
       state[id] = true;
-      localStorage.setItem('checkedState', JSON.stringify(state));
+      if (isBrowser) localStorage.setItem('checkedState', JSON.stringify(state));
     },
     setCheckedFalse(state, action: PayloadAction<{ id: number }>) {
       const { id } = action.payload;
       state[id] = false;
-      localStorage.setItem('checkedState', JSON.stringify(state));
+      if (isBrowser) localStorage.setItem('checkedState', JSON.stringify(state));
     },
     clearAllChecked(state) {
       Object.keys(state).forEach((key) => {
         state[parseInt(key)] = false;
       });
-      localStorage.setItem('checkedState', JSON.stringify(state));
+      if (isBrowser) localStorage.setItem('checkedState', JSON.stringify(state));
     },
   },
 });
