@@ -64,6 +64,10 @@ const Cart = () => {
     return (
       <>
         <div className="cart-container">
+          <div className="mobile-cart-content">
+            <h1>Корзина товаров</h1>
+            <h2 onClick={handleClearCart}>🗑️Очистить</h2>
+          </div>
           <h1 className="title-cart">Корзина</h1>
           <h3 onClick={handleClearCart}>🗑️Очистить корзину</h3>
           <div className="line-for-cart"></div>

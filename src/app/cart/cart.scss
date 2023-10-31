@@ -2,6 +2,28 @@
   display: flex;
   justify-content: center;
 
+  .mobile-cart-content {
+    text-align: center;
+    display: none;
+
+    @media (max-width: 614px) {
+      display: block;
+    }
+
+    h1 {
+      color: #fe5f1e;
+    }
+
+    h2 {
+      font-size: 21px;
+      color: grey;
+
+      &:hover {
+        color: rgb(167, 167, 167);
+      }
+    }
+  }
+
   // .clear-icon {
   //   width: 20px;
   //   height: 20px;
@@ -13,6 +35,7 @@
     height: 1230px;
     border-radius: 10px;
     background-color: #fffbeb;
+    overflow: hidden;
 
     .card-down-text {
       display: flex;
@@ -117,6 +140,10 @@
       font-weight: 700;
       line-height: normal;
       letter-spacing: 0.32px;
+
+      @media (max-width: 614px) {
+        display: none;
+      }
     }
 
     h3 {
@@ -234,6 +261,22 @@
 
       .empty-cart-icon {
         margin-top: -36px;
+
+        @media (max-width: 550px) {
+          width: 492px;
+        }
+
+        @media (max-width: 525px) {
+          width: 468px;
+        }
+        @media (max-width: 463px) {
+          width: 399px;
+          height: 330px;
+        }
+        @media (max-width: 408px) {
+          width: 371px;
+          height: 333px;
+        }
       }
     }
 

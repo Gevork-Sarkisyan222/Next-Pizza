@@ -12,7 +12,7 @@ const nextConfig = {
       'dodopizza-a.akamaihd.net',
       'react-pizza-v2-psi.vercel.app',
       'c8.alamy.com',
-      's3-alpha-sig.figma.com',
+      'react-pizza-v2.vercel.app',
     ],
   },
 };
