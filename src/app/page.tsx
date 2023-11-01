@@ -699,6 +699,7 @@ export type Category = 'Все' | 'Мясные' | 'Вегетарианская
 
 export default function Home() {
   const value = useSelector((state: RootState) => state.value.value);
+  const openMenu = useSelector((state) => state.openMenu.openMenu);
   const dispatch = useDispatch();
 
   const [selectCategory, setSelectCategory] = useState<Category>('Все');
@@ -837,238 +838,148 @@ export default function Home() {
   };
 
   return (
-    <div className="main-container">
-      <div className="main-wrapper">
-        <AppBar
-          setSelectCategory={setSelectCategory}
-          setOpenMeatPizza={setOpenMeatPizza}
-          setOpenVeganPizza={setOpenVeganPizza}
-          setOpenGrillPizza={setOpenGrillPizza}
-          setOpenSpicyPizza={setOpenSpicyPizza}
-          setOpenCheesePizza={setOpenCheesePizza}
-          setDefaultCardRender={setDefaultCardRender}
-          setOpenCheapPizzas={setOpenCheapPizzas}
-          setOpenExpenisvePizzas={setOpenExpenisvePizzas}
-        />
+    <>
+      {openMenu && <div className="black-bg"></div>}
 
-        <div className="center-title">
-          <h1>Покупайте пиццы внизу</h1>
-        </div>
-        <div
-          onClick={() => setOpenCheapPizzas(false)}
-          onClickCapture={() => setOpenExpenisvePizzas(false)}
-          className="select-buttons-section">
-          <button
-            onClickCapture={removeMeat}
-            className={selectCategory === 'Все' ? 'selected-black' : ''}
-            onClick={() => handleCategoryClick('Все')}>
-            Все
-          </button>
-          <button
-            onClickCapture={openMeat}
-            className={selectCategory === 'Мясные' ? 'selected-black' : ''}
-            onClick={() => handleCategoryClick('Мясные')}>
-            Мясные
-          </button>
-          <button
-            onClickCapture={openVegan}
-            className={selectCategory === 'Вегетарианская' ? 'selected-black' : ''}
-            onClick={() => handleCategoryClick('Вегетарианская')}>
-            Вегетарианская
-          </button>
+      <div className="main-container">
+        <div className="main-wrapper">
+          <AppBar
+            setSelectCategory={setSelectCategory}
+            setOpenMeatPizza={setOpenMeatPizza}
+            setOpenVeganPizza={setOpenVeganPizza}
+            setOpenGrillPizza={setOpenGrillPizza}
+            setOpenSpicyPizza={setOpenSpicyPizza}
+            setOpenCheesePizza={setOpenCheesePizza}
+            setDefaultCardRender={setDefaultCardRender}
+            setOpenCheapPizzas={setOpenCheapPizzas}
+            setOpenExpenisvePizzas={setOpenExpenisvePizzas}
+          />
 
-          <button
-            onClickCapture={openGrill}
-            className={selectCategory === 'Гриль' ? 'selected-black' : ''}
-            onClick={() => handleCategoryClick('Гриль')}>
-            Гриль
-          </button>
-          <button
-            onClickCapture={openSpicy}
-            className={selectCategory === 'Острые' ? 'selected-black' : ''}
-            onClick={() => handleCategoryClick('Острые')}>
-            Острые
-          </button>
-          <button
-            onClickCapture={openCheese}
-            className={selectCategory === 'Сырные' ? 'selected-black' : ''}
-            onClick={() => handleCategoryClick('Сырные')}>
-            Сырные
-          </button>
-        </div>
-        {openSort && (
-          <div className="select-sort">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="162"
-              height="166"
-              viewBox="0 0 162 166"
-              fill="none">
-              <g filter="url(#filter0_d_8_0)">
-                <rect x="15" y="10" width="132" height="136" rx="10" fill="white" />
-              </g>
-
-              <defs>
-                <filter
-                  id="filter0_d_8_0"
-                  x="0"
-                  y="0"
-                  width="162"
-                  height="166"
-                  filterUnits="userSpaceOnUse"
-                  color-interpolation-filters="sRGB">
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset dy="5" />
-                  <feGaussianBlur stdDeviation="7.5" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"
-                  />
-                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_8_0" />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="effect1_dropShadow_8_0"
-                    result="shape"
-                  />
-                </filter>
-              </defs>
-            </svg>
-            <div className="select-sort-text">
-              <h3 onClick={handleAllSortPopularnosty}>популярности</h3>
-              <h3 onClick={handleOpenCheapPizzas}>самые дешевые</h3>
-              <h3 onClick={handleOpenExpenisvePizzas}>самые дорогие</h3>
-            </div>
+          <div className="center-title">
+            <h1>Покупайте пиццы внизу</h1>
           </div>
-        )}
-        <div className="sort">
-          <h1 onClick={() => setOpenSort(true)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="6"
-              viewBox="0 0 10 6"
-              fill="none">
-              <path
-                d="M10 5C10 5.16927 9.93815 5.31576 9.81445 5.43945C9.69075 5.56315 9.54427 5.625 9.375 5.625H0.625C0.455729 5.625 0.309245 5.56315 0.185547 5.43945C0.061849 5.31576 0 5.16927 0 5C0 4.83073 0.061849 4.68424 0.185547 4.56055L4.56055 0.185547C4.68424 0.061849 4.83073 0 5 0C5.16927 0 5.31576 0.061849 5.43945 0.185547L9.81445 4.56055C9.93815 4.68424 10 4.83073 10 5Z"
-                fill="#2C2C2C"
-              />
-            </svg>
-            <span className="sort-text">Сортировка по:</span>
-            <span className="sort-select-text">популярности</span>
-          </h1>
-        </div>
-        <div className="title">
-          <h1>Все пиццы</h1>
-        </div>
-        <div className="pizza-container">
-          {/* expensive pizzas */}
-          {openExpenisvepPizzas &&
-            expensivePizzas.map((obj) => (
-              <>
-                <PizzaCard
-                  key={obj.id}
-                  image={obj.image}
-                  title={obj.title}
-                  price={obj.price}
-                  id={obj.id}
-                />
-              </>
-            ))}
-          {/* cheap pizzas */}
-          {openCheapPizzas &&
-            cheapPizzas.map((obj) => (
-              <>
-                <PizzaCard
-                  key={obj.id}
-                  image={obj.image}
-                  title={obj.title}
-                  price={obj.price}
-                  id={obj.id}
-                />
-              </>
-            ))}
+          <div
+            onClick={() => setOpenCheapPizzas(false)}
+            onClickCapture={() => setOpenExpenisvePizzas(false)}
+            className="select-buttons-section">
+            <button
+              onClickCapture={removeMeat}
+              className={selectCategory === 'Все' ? 'selected-black' : ''}
+              onClick={() => handleCategoryClick('Все')}>
+              Все
+            </button>
+            <button
+              onClickCapture={openMeat}
+              className={selectCategory === 'Мясные' ? 'selected-black' : ''}
+              onClick={() => handleCategoryClick('Мясные')}>
+              Мясные
+            </button>
+            <button
+              onClickCapture={openVegan}
+              className={selectCategory === 'Вегетарианская' ? 'selected-black' : ''}
+              onClick={() => handleCategoryClick('Вегетарианская')}>
+              Вегетарианская
+            </button>
 
-          {/* cheese pizza */}
-          {openCheesePizza &&
-            pizzasCheese.map((obj) => (
-              <>
-                <PizzaCard
-                  key={obj.id}
-                  image={obj.image}
-                  title={obj.title}
-                  price={obj.price}
-                  id={obj.id}
-                />
-              </>
-            ))}
+            <button
+              onClickCapture={openGrill}
+              className={selectCategory === 'Гриль' ? 'selected-black' : ''}
+              onClick={() => handleCategoryClick('Гриль')}>
+              Гриль
+            </button>
+            <button
+              onClickCapture={openSpicy}
+              className={selectCategory === 'Острые' ? 'selected-black' : ''}
+              onClick={() => handleCategoryClick('Острые')}>
+              Острые
+            </button>
+            <button
+              onClickCapture={openCheese}
+              className={selectCategory === 'Сырные' ? 'selected-black' : ''}
+              onClick={() => handleCategoryClick('Сырные')}>
+              Сырные
+            </button>
+          </div>
+          {openSort && (
+            <div className="select-sort">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="162"
+                height="166"
+                viewBox="0 0 162 166"
+                fill="none">
+                <g filter="url(#filter0_d_8_0)">
+                  <rect x="15" y="10" width="132" height="136" rx="10" fill="white" />
+                </g>
 
-          {/* spciy pizza */}
-          {openSpicyPizza &&
-            pizzasSpicy.map((obj) => (
-              <>
-                <PizzaCard
-                  key={obj.id}
-                  image={obj.image}
-                  title={obj.title}
-                  price={obj.price}
-                  id={obj.id}
+                <defs>
+                  <filter
+                    id="filter0_d_8_0"
+                    x="0"
+                    y="0"
+                    width="162"
+                    height="166"
+                    filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix
+                      in="SourceAlpha"
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha"
+                    />
+                    <feOffset dy="5" />
+                    <feGaussianBlur stdDeviation="7.5" />
+                    <feColorMatrix
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"
+                    />
+                    <feBlend
+                      mode="normal"
+                      in2="BackgroundImageFix"
+                      result="effect1_dropShadow_8_0"
+                    />
+                    <feBlend
+                      mode="normal"
+                      in="SourceGraphic"
+                      in2="effect1_dropShadow_8_0"
+                      result="shape"
+                    />
+                  </filter>
+                </defs>
+              </svg>
+              <div className="select-sort-text">
+                <h3 onClick={handleAllSortPopularnosty}>популярности</h3>
+                <h3 onClick={handleOpenCheapPizzas}>самые дешевые</h3>
+                <h3 onClick={handleOpenExpenisvePizzas}>самые дорогие</h3>
+              </div>
+            </div>
+          )}
+          <div className="sort">
+            <h1 onClick={() => setOpenSort(true)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none">
+                <path
+                  d="M10 5C10 5.16927 9.93815 5.31576 9.81445 5.43945C9.69075 5.56315 9.54427 5.625 9.375 5.625H0.625C0.455729 5.625 0.309245 5.56315 0.185547 5.43945C0.061849 5.31576 0 5.16927 0 5C0 4.83073 0.061849 4.68424 0.185547 4.56055L4.56055 0.185547C4.68424 0.061849 4.83073 0 5 0C5.16927 0 5.31576 0.061849 5.43945 0.185547L9.81445 4.56055C9.93815 4.68424 10 4.83073 10 5Z"
+                  fill="#2C2C2C"
                 />
-              </>
-            ))}
-          {/* grill pizza */}
-          {openGrillPizza &&
-            pizzasGrill.map((obj) => (
-              <>
-                <PizzaCard
-                  key={obj.id}
-                  image={obj.image}
-                  title={obj.title}
-                  price={obj.price}
-                  id={obj.id}
-                />
-              </>
-            ))}
-
-          {/* vegan pizza */}
-          {openVeganPizza &&
-            pizzasVegan.map((obj) => (
-              <>
-                <PizzaCard
-                  key={obj.id}
-                  image={obj.image}
-                  title={obj.title}
-                  price={obj.price}
-                  id={obj.id}
-                />
-              </>
-            ))}
-
-          {/* meat pizzas */}
-          {openMeatPizza &&
-            pizzasMeat.map((obj) => (
-              <>
-                <PizzaCard
-                  key={obj.id}
-                  image={obj.image}
-                  title={obj.title}
-                  price={obj.price}
-                  id={obj.id}
-                />
-              </>
-            ))}
-
-          {/* default pizzas */}
-          {filteredFindPizzas.length > 0 ? (
-            filteredFindPizzas.map((obj) => (
-              <>
-                {defaultCardRender && (
+              </svg>
+              <span className="sort-text">Сортировка по:</span>
+              <span className="sort-select-text">популярности</span>
+            </h1>
+          </div>
+          <div className="title">
+            <h1>Все пиццы</h1>
+          </div>
+          <div className="pizza-container">
+            {/* expensive pizzas */}
+            {openExpenisvepPizzas &&
+              expensivePizzas.map((obj) => (
+                <>
                   <PizzaCard
                     key={obj.id}
                     image={obj.image}
@@ -1076,14 +987,112 @@ export default function Home() {
                     price={obj.price}
                     id={obj.id}
                   />
-                )}
-              </>
-            ))
-          ) : (
-            <NotFoundPizza />
-          )}
+                </>
+              ))}
+            {/* cheap pizzas */}
+            {openCheapPizzas &&
+              cheapPizzas.map((obj) => (
+                <>
+                  <PizzaCard
+                    key={obj.id}
+                    image={obj.image}
+                    title={obj.title}
+                    price={obj.price}
+                    id={obj.id}
+                  />
+                </>
+              ))}
+
+            {/* cheese pizza */}
+            {openCheesePizza &&
+              pizzasCheese.map((obj) => (
+                <>
+                  <PizzaCard
+                    key={obj.id}
+                    image={obj.image}
+                    title={obj.title}
+                    price={obj.price}
+                    id={obj.id}
+                  />
+                </>
+              ))}
+
+            {/* spciy pizza */}
+            {openSpicyPizza &&
+              pizzasSpicy.map((obj) => (
+                <>
+                  <PizzaCard
+                    key={obj.id}
+                    image={obj.image}
+                    title={obj.title}
+                    price={obj.price}
+                    id={obj.id}
+                  />
+                </>
+              ))}
+            {/* grill pizza */}
+            {openGrillPizza &&
+              pizzasGrill.map((obj) => (
+                <>
+                  <PizzaCard
+                    key={obj.id}
+                    image={obj.image}
+                    title={obj.title}
+                    price={obj.price}
+                    id={obj.id}
+                  />
+                </>
+              ))}
+
+            {/* vegan pizza */}
+            {openVeganPizza &&
+              pizzasVegan.map((obj) => (
+                <>
+                  <PizzaCard
+                    key={obj.id}
+                    image={obj.image}
+                    title={obj.title}
+                    price={obj.price}
+                    id={obj.id}
+                  />
+                </>
+              ))}
+
+            {/* meat pizzas */}
+            {openMeatPizza &&
+              pizzasMeat.map((obj) => (
+                <>
+                  <PizzaCard
+                    key={obj.id}
+                    image={obj.image}
+                    title={obj.title}
+                    price={obj.price}
+                    id={obj.id}
+                  />
+                </>
+              ))}
+
+            {/* default pizzas */}
+            {filteredFindPizzas.length > 0 ? (
+              filteredFindPizzas.map((obj) => (
+                <>
+                  {defaultCardRender && (
+                    <PizzaCard
+                      key={obj.id}
+                      image={obj.image}
+                      title={obj.title}
+                      price={obj.price}
+                      id={obj.id}
+                    />
+                  )}
+                </>
+              ))
+            ) : (
+              <NotFoundPizza />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

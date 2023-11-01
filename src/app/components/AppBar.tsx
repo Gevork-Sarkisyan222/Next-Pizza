@@ -8,6 +8,7 @@ import { setInputValue, setInputValueDefalut } from '../redux/slices/InputState.
 import Link from 'next/link';
 import { Category } from '../page';
 import Image from 'next/image';
+import { setOpenMenu, setCloseMenu } from '../redux/slices/openMenu.slice';
 
 interface AppBarProps {
   setSelectCategory?: (category: Category) => void;
@@ -34,7 +35,7 @@ const AppBar: React.FC<AppBarProps> = ({
 }) => {
   const value = useSelector((state: RootState) => state.value.value);
   const inputState = useSelector((state: any) => state.inputState.inputState);
-  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const openMenu = useSelector((state) => state.openMenu.openMenu);
   const [isScrollHidden, setIsScrollHidden] = useState(false);
 
   const handleOpenMobileMenu = () => {
@@ -44,13 +45,13 @@ const AppBar: React.FC<AppBarProps> = ({
     });
     document.body.style.overflow = 'hidden';
     setIsScrollHidden(true);
-    setOpenMobileMenu(true);
+    dispatch(setOpenMenu());
   };
 
   const handleCloseMobileMenu = () => {
     document.body.style.overflow = 'auto';
     setIsScrollHidden(false);
-    setOpenMobileMenu(false);
+    dispatch(setCloseMenu());
   };
 
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ const AppBar: React.FC<AppBarProps> = ({
     dispatch(setInputValue());
 
     // close menu
-    setOpenMobileMenu(false);
+    dispatch(setCloseMenu());
     document.body.style.overflow = 'auto';
     setIsScrollHidden(false);
   };
@@ -92,7 +93,7 @@ const AppBar: React.FC<AppBarProps> = ({
     dispatch(setInputValue());
 
     // close menu
-    setOpenMobileMenu(false);
+    dispatch(setCloseMenu());
     document.body.style.overflow = 'auto';
     setIsScrollHidden(false);
   };
@@ -138,7 +139,7 @@ const AppBar: React.FC<AppBarProps> = ({
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///9vc4BiZnVpbnuChZD4+fmtr7VobHpscH5manhjaHZgZHPBw8jl5ui8vsNxdYLU1dmRlJ7NztK2uL7v7/Hb3N+anKWIi5Wkpq58gIu4usDGx8zZ2t3q6uy/wMaqrLPesr9gAAACMklEQVR4nO3d4XKqMBCG4QhHA0EQREsVq/d/l6Xt9HTOL/vFGcNy3ucK8g3KkplN1jkAAAAAAAAAAAAAAAAAAIBnWs/bg+m2XVFl81YV3TY6374oi9X8TavcxwXcZKnX/mvVJibg2U7A1So76wHrKvWqJVUtJ+ws/AV/FJ0acB1Sr1kU1LqxL1MvWVSq79PGp16yyDdiwj5PvWRRrr5NR3PPcBQTHi1Vww+ZXC52qZcs2qkBXWPrZVpe5YRuZ6nkF/ojdO5gYmPxpfCHiITucLLyQy1PUQEnZx+8z+fNT2uM2Fj8dWw2c9ccH8gHAAAAAAAAAAAAAADwRHXzMvyZt+Gl0Vu8vx264PNi7nIfusiGodZM21dRtjEBL5aOI1QXPeDaSlPbl1I/4vVqqw3av8oJbQWcIqoBL+ZOlKj/xKu5Z6i2QffmEvZiwq25hOpJ0tZWsZjKhVz0zT1DNeB/UA+NHUCUjx9OWlPfpVGf3m0ws7cIUQGdexsyn3r39ws+G97iAk7qvpv9Hr/r4/f4AAAAAAAAAAAAAAAAT1WPfeq7Le/ox0daMRoj95eql5V/Wxu6gzZqGMvy7xE+2Qk4RTzpAa3d563fJbz4O9nrxd+rv/xefXPnLXL1vIW9GSXqmZnlz5kx1qof06y/+HlP5mZ2RTSz95Z+p0F9k3662Sn62S0moHOjmfmH6iSkH9chpJ5ReVcYIobo/CP1oNE7HkwHAAAAAAAAAAAAAAAAAACgeQeo1VEIDtSz5gAAAABJRU5ErkJggg=="
           alt="menu icon"
         />
-        {openMobileMenu && (
+        {openMenu && (
           <div className="menu">
             <h2>Меню</h2>
             <Image

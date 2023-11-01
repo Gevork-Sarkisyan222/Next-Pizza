@@ -50,6 +50,10 @@
         font-weight: 700;
         line-height: normal;
         letter-spacing: 0.22px;
+
+        @media (max-width: 450px) {
+          font-size: 18px;
+        }
       }
 
       .finally-price-text {
@@ -61,6 +65,10 @@
         font-weight: 400;
         line-height: normal;
         letter-spacing: 0.22px;
+
+        @media (max-width: 450px) {
+          font-size: 18px;
+        }
 
         span {
           color: #fe5f1e;
@@ -94,6 +102,10 @@
         line-height: normal;
         cursor: pointer;
 
+        @media (max-width: 450px) {
+          width: 175px;
+        }
+
         &:hover {
           border-radius: 30px;
           background: #282828;
@@ -122,6 +134,10 @@
         line-height: normal;
         border: none;
         cursor: pointer;
+
+        @media (max-width: 450px) {
+          width: 187px;
+        }
 
         &:hover {
           background: #fa6f39;
@@ -187,6 +203,14 @@
         max-height: 535px;
         overflow: auto;
         max-width: 829px;
+
+        @media (max-width: 450px) {
+          max-width: 337px;
+        }
+
+        @media (max-width: 430px) {
+          max-width: 311px !important;
+        }
 
         @media (max-width: 1044px) {
           max-width: 696px;
