@@ -35,7 +35,7 @@ const AppBar: React.FC<AppBarProps> = ({
 }) => {
   const value = useSelector((state: RootState) => state.value.value);
   const inputState = useSelector((state: any) => state.inputState.inputState);
-  const openMenu = useSelector((state) => state.openMenu.openMenu);
+  const openMenu = useSelector((state: any) => state.openMenu.openMenu);
   const [isScrollHidden, setIsScrollHidden] = useState(false);
 
   const handleOpenMobileMenu = () => {

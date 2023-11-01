@@ -699,7 +699,7 @@ export type Category = 'Все' | 'Мясные' | 'Вегетарианская
 
 export default function Home() {
   const value = useSelector((state: RootState) => state.value.value);
-  const openMenu = useSelector((state) => state.openMenu.openMenu);
+  const openMenu = useSelector((state: any) => state.openMenu.openMenu);
   const dispatch = useDispatch();
 
   const [selectCategory, setSelectCategory] = useState<Category>('Все');
