@@ -14,6 +14,7 @@ import Image from 'next/image';
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.cart);
+  const openMenu = useSelector((state: any) => state.openMenu.openMenu);
   const dispatch = useDispatch();
   const deliverNumber = Math.floor(Math.random() * 100);
 
@@ -37,32 +38,36 @@ const Cart = () => {
   const renderCart = () => {
     if (cart.length === 0) {
       return (
-        <div className="Empty-Cart-Wrapper">
-          <div className="empty-container">
-            <h1>Корзина пустая 😕</h1>
-            <p>
-              Вероятней всего, вы не заказывали ещё пиццу. Для того, чтобы заказать пиццу, перейди
-              на главную страницу.
-            </p>
-            <div className="img-and-button">
-              <Image
-                width={550}
-                height={450}
-                className="empty-cart-icon"
-                src="https://cdni.iconscout.com/illustration/free/thumb/free-empty-cart-4085814-3385483.png"
-                alt="empty-cart"
-              />
-              <Link href={'/'}>
-                <button>Вернуться назад</button>
-              </Link>
+        <>
+          {openMenu && <div className="black-bg"></div>}
+          <div className="Empty-Cart-Wrapper">
+            <div className="empty-container">
+              <h1>Корзина пустая 😕</h1>
+              <p>
+                Вероятней всего, вы не заказывали ещё пиццу. Для того, чтобы заказать пиццу, перейди
+                на главную страницу.
+              </p>
+              <div className="img-and-button">
+                <Image
+                  width={550}
+                  height={450}
+                  className="empty-cart-icon"
+                  src="https://cdni.iconscout.com/illustration/free/thumb/free-empty-cart-4085814-3385483.png"
+                  alt="empty-cart"
+                />
+                <Link href={'/'}>
+                  <button>Вернуться назад</button>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       );
     }
 
     return (
       <>
+        {openMenu && <div className="black-bg"></div>}
         <div className="cart-container">
           <div className="mobile-cart-content">
             <h1>Корзина товаров</h1>
