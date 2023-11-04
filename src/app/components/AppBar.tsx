@@ -187,7 +187,7 @@ const AppBar: React.FC<AppBarProps> = ({
           height={100}
           onClick={handleOpenMobileMenu}
           className="menu-icon"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///9vc4BiZnVpbnuChZD4+fmtr7VobHpscH5manhjaHZgZHPBw8jl5ui8vsNxdYLU1dmRlJ7NztK2uL7v7/Hb3N+anKWIi5Wkpq58gIu4usDGx8zZ2t3q6uy/wMaqrLPesr9gAAACMklEQVR4nO3d4XKqMBCG4QhHA0EQREsVq/d/l6Xt9HTOL/vFGcNy3ucK8g3KkplN1jkAAAAAAAAAAAAAAAAAAIBnWs/bg+m2XVFl81YV3TY6374oi9X8TavcxwXcZKnX/mvVJibg2U7A1So76wHrKvWqJVUtJ+ws/AV/FJ0acB1Sr1kU1LqxL1MvWVSq79PGp16yyDdiwj5PvWRRrr5NR3PPcBQTHi1Vww+ZXC52qZcs2qkBXWPrZVpe5YRuZ6nkF/ojdO5gYmPxpfCHiITucLLyQy1PUQEnZx+8z+fNT2uM2Fj8dWw2c9ccH8gHAAAAAAAAAAAAAADwRHXzMvyZt+Gl0Vu8vx264PNi7nIfusiGodZM21dRtjEBL5aOI1QXPeDaSlPbl1I/4vVqqw3av8oJbQWcIqoBL+ZOlKj/xKu5Z6i2QffmEvZiwq25hOpJ0tZWsZjKhVz0zT1DNeB/UA+NHUCUjx9OWlPfpVGf3m0ws7cIUQGdexsyn3r39ws+G97iAk7qvpv9Hr/r4/f4AAAAAAAAAAAAAAAAT1WPfeq7Le/ox0daMRoj95eql5V/Wxu6gzZqGMvy7xE+2Qk4RTzpAa3d563fJbz4O9nrxd+rv/xefXPnLXL1vIW9GSXqmZnlz5kx1qof06y/+HlP5mZ2RTSz95Z+p0F9k3662Sn62S0moHOjmfmH6iSkH9chpJ5ReVcYIobo/CP1oNE7HkwHAAAAAAAAAAAAAAAAAACgeQeo1VEIDtSz5gAAAABJRU5ErkJggg=="
+          src="https://cdn-icons-png.flaticon.com/512/8771/8771165.png"
           alt="menu icon"
         />
         {openMenu && (
@@ -226,6 +226,7 @@ const AppBar: React.FC<AppBarProps> = ({
                 <a href="https://www.youtube.com/watch?v=YqCcjFtPOIM" target="_blank">
                   <button>Готовка</button>
                 </a>
+
                 <div className="menu-sort-content">
                   <h3 className={`${theme ? 'sort-text-dark' : ''}`}>сортировка</h3>
 
@@ -236,10 +237,10 @@ const AppBar: React.FC<AppBarProps> = ({
                 </div>
               </div>
               <div className="theme-container">
-                <button onClick={handleChangeThemeToLight}>
+                <button className="light-button" onClick={handleChangeThemeToLight}>
                   <SunIcon />
                 </button>
-                <button onClick={handleChangeThemeToDark}>
+                <button className="dark-button" onClick={handleChangeThemeToDark}>
                   <MoonIcon />
                 </button>
               </div>

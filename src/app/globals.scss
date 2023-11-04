@@ -704,18 +704,26 @@ body {
         position: absolute;
         top: 438px;
 
+        .light-button {
+          &:hover {
+            background: rgb(207, 207, 207);
+          }
+        }
+
+        .dark-button {
+          &:hover {
+            background: black;
+          }
+        }
+
         button {
           width: 70px;
-          height: 30px;
+          height: 37px;
           border-radius: 20px;
           border: none;
           background: orange;
           color: white;
           cursor: pointer;
-
-          &:hover {
-            background: #fec21e;
-          }
         }
       }
 

@@ -13,6 +13,7 @@ const nextConfig = {
       'react-pizza-v2-psi.vercel.app',
       'c8.alamy.com',
       'react-pizza-v2.vercel.app',
+      'cdn-icons-png.flaticon.com',
     ],
   },
 };
