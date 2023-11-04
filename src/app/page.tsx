@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/slices/types/type';
 import NotFoundPizza from './components/NotFoundPizza';
 import { setInputValue, setInputValueDefalut } from './redux/slices/InputState.slice';
+import { setChangeTheme } from './redux/slices/changeTheme.slice';
 
 type pizza = {
   id: number;
@@ -700,6 +701,7 @@ export type Category = 'Все' | 'Мясные' | 'Вегетарианская
 export default function Home() {
   const value = useSelector((state: RootState) => state.value.value);
   const openMenu = useSelector((state: any) => state.openMenu.openMenu);
+
   const dispatch = useDispatch();
 
   const [selectCategory, setSelectCategory] = useState<Category>('Все');
@@ -714,6 +716,8 @@ export default function Home() {
   // sort
   const [openCheapPizzas, setOpenCheapPizzas] = useState(false);
   const [openExpenisvepPizzas, setOpenExpenisvePizzas] = useState(false);
+
+  const theme = useSelector((state: any) => state.changeTheme.theme);
 
   const handleOpenCheapPizzas = () => {
     // open pizzas
@@ -837,14 +841,17 @@ export default function Home() {
     dispatch(setInputValueDefalut());
   };
 
+  const handleChangeTheme = () => {
+    dispatch(setChangeTheme());
+  };
+
   return (
     <>
       {openMenu && <div className="black-bg"></div>}
 
       <div className="main-container">
-        <div className="main-wrapper">
+        <div className={`main-wrapper ${theme ? 'changed-theme-bg' : ''}`}>
           <AppBar
-            setSelectCategory={setSelectCategory}
             setOpenMeatPizza={setOpenMeatPizza}
             setOpenVeganPizza={setOpenVeganPizza}
             setOpenGrillPizza={setOpenGrillPizza}
@@ -952,11 +959,13 @@ export default function Home() {
                 <h3 onClick={handleAllSortPopularnosty}>популярности</h3>
                 <h3 onClick={handleOpenCheapPizzas}>самые дешевые</h3>
                 <h3 onClick={handleOpenExpenisvePizzas}>самые дорогие</h3>
+                <button>light</button>
+                <button>dark</button>
               </div>
             </div>
           )}
           <div className="sort">
-            <h1 onClick={() => setOpenSort(true)}>
+            <h1 className={`${theme ? 'sort-title-dark' : ''}`} onClick={() => setOpenSort(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="10"
@@ -973,7 +982,7 @@ export default function Home() {
             </h1>
           </div>
           <div className="title">
-            <h1>Все пиццы</h1>
+            <h1 className={`${theme ? 'black-title' : ''}`}>Все пиццы</h1>
           </div>
           <div className="pizza-container">
             {/* expensive pizzas */}

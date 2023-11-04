@@ -20,6 +20,10 @@
         font-weight: 700;
         line-height: normal;
         letter-spacing: 0.22px;
+
+        &.cart-card-title-dark {
+          color: white;
+        }
       }
 
       p {
@@ -53,11 +57,16 @@
         font-weight: 700;
         line-height: normal;
         letter-spacing: 0.22px;
+
+        &.count-dark {
+          color: orange !important;
+        }
       }
 
       img {
         width: 32px;
         height: 32px;
+        border-radius: 26px;
         cursor: pointer;
       }
     }
@@ -67,14 +76,20 @@
         margin-left: -260px;
         font-style: normal;
         font-weight: 700;
+
+        &.price-text-dark {
+          color: white;
+        }
       }
     }
     .remove-icon {
       margin-left: -387px;
       margin-top: 18px;
+
       img {
         width: 36px;
         height: 36px;
+        border-radius: 173px;
         cursor: pointer;
       }
     }

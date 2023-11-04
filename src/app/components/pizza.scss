@@ -21,6 +21,10 @@
       font-weight: 800;
       line-height: normal;
       letter-spacing: 0.2px;
+
+      &.title-for-dark {
+        color: white;
+      }
     }
 
     img {
@@ -43,6 +47,10 @@
     padding: 5px;
     flex-wrap: wrap;
     gap: 8px;
+
+    &.select-dark-size {
+      background: grey;
+    }
 
     button {
       border-radius: 5px;
@@ -80,6 +88,10 @@
       font-weight: 700;
       line-height: normal;
       letter-spacing: 0.33px;
+
+      &.price-dark {
+        color: white;
+      }
     }
 
     button {

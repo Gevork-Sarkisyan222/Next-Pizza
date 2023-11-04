@@ -22,6 +22,7 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
   // });
   const dispatch = useDispatch();
   const checked = useSelector((state: RootState) => state.checked[id]);
+  const theme = useSelector((state: any) => state.changeTheme.theme);
 
   // useEffect(() => {
   //   const savedChecked = localStorage.getItem(`checked_${id}`);
@@ -84,9 +85,9 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
       <div className="PizzaCard">
         <div className="pizza-img-title">
           <Image width={260} height={260} src={image} alt="pizza" />
-          <h1>{title}</h1>
+          <h1 className={`${theme ? 'title-for-dark' : ''}`}>{title}</h1>
         </div>
-        <div className="select-size">
+        <div className={`select-size ${theme ? 'select-dark-size' : ''}`}>
           <button
             className={selectedButton === 'тонкое' ? 'selected-size-black' : ''}
             onClick={() => handleButtonClick('тонкое')}>
@@ -114,7 +115,7 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
           </button>
         </div>
         <div className="price-button">
-          <h1>от {price} ₽</h1>
+          <h1 className={`${theme ? 'price-dark' : ''}`}>от {price} ₽</h1>
 
           <button>
             {checked ? (

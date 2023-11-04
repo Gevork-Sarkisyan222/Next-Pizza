@@ -15,6 +15,7 @@ import Image from 'next/image';
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.cart);
   const openMenu = useSelector((state: any) => state.openMenu.openMenu);
+  const theme = useSelector((state: any) => state.changeTheme.theme);
   const dispatch = useDispatch();
   const deliverNumber = Math.floor(Math.random() * 100);
 
@@ -42,7 +43,7 @@ const Cart = () => {
           {openMenu && <div className="black-bg"></div>}
           <div className="Empty-Cart-Wrapper">
             <div className="empty-container">
-              <h1>Корзина пустая 😕</h1>
+              <h1 className={`${theme ? 'empty-cart-text-dark' : ''}`}>Корзина пустая 😕</h1>
               <p>
                 Вероятней всего, вы не заказывали ещё пиццу. Для того, чтобы заказать пиццу, перейди
                 на главную страницу.
@@ -73,7 +74,7 @@ const Cart = () => {
             <h1>Корзина товаров</h1>
             <h2 onClick={handleClearCart}>🗑️Очистить</h2>
           </div>
-          <h1 className="title-cart">Корзина</h1>
+          <h1 className={`title-cart ${theme ? 'title-cart-dark' : ''}`}>Корзина</h1>
           <h3 onClick={handleClearCart}>🗑️Очистить корзину</h3>
           <div className="line-for-cart"></div>
         </div>
@@ -91,8 +92,10 @@ const Cart = () => {
           </div>
         </div>
         <div className="card-down-text">
-          <h2 className="first-count-text ">Всего пицц: {cart.length} шт.</h2>
-          <h2 className="finally-price-text">
+          <h2 className={`first-count-text ${theme ? 'count-text-dark ' : ''}`}>
+            Всего пицц: {cart.length} шт.
+          </h2>
+          <h2 className={`finally-price-text ${theme ? 'finally-price-text-dark' : ''}`}>
             Сумма заказа: <span>900 ₽</span>
           </h2>
         </div>
@@ -110,7 +113,7 @@ const Cart = () => {
 
   return (
     <div className="Cart-Main">
-      <div className="cart-wrapper">
+      <div className={`cart-wrapper ${theme ? 'changed-theme-cart-bg' : ''}`}>
         <AppBar />
         {renderCart()}
       </div>

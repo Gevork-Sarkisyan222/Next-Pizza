@@ -7,6 +7,7 @@ import cart from './slices/cart.slice';
 import checked from './slices/checked.slice';
 import inputState from './slices/InputState.slice';
 import openMenu from './slices/openMenu.slice';
+import changeTheme from './slices/changeTheme.slice';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     checked,
     inputState,
     openMenu,
+    changeTheme,
   },
 });
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import './cartCard.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeCart } from '../redux/slices/cart.slice';
 import { setCheckedFalse } from '../redux/slices/checked.slice';
 import Image from 'next/image';
@@ -17,6 +17,7 @@ interface Iprops {
 const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
   const dispatch = useDispatch();
   const [pizzaCount, setPizzaCount] = useState(1);
+  const theme = useSelector((state: any) => state.changeTheme.theme);
 
   const setPizzaCountPlus = () => {
     setPizzaCount(pizzaCount + 1);
@@ -42,7 +43,7 @@ const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
       <div className="cart-card-content">
         <div className="prop-container">
           <Image width={500} height={500} src={image} alt="pizzas-image" />
-          <h1>{title}</h1>
+          <h1 className={`${theme ? 'cart-card-title-dark' : ''}`}>{title}</h1>
           {/* <p>тонкое тесто, 26 см.</p> */}
         </div>
 
@@ -54,7 +55,7 @@ const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAnFBMVEX/////pQD/owD/oQD/qgD/8Nb/pgD/3qf/4rP/nwD/qAD///z/0qD/+/L//vr//fb/tT7/9+j/5Lv/16P/9OD/uEn/+ez/9eP/79L/68n/36z/2p//58L/xGv/47X/t0H/0Yf/yXL/wWP/ryP/wFv/1pX/szP/zHr/rRn/wXD/zIL/vlL/xWf/syr/2qf/t0z/rzf/x3v/u1v/vF9aI12VAAAM8UlEQVR4nO1da3uquhIuE0TBBYoLL6itWhRptXavff7/fzvBS5famSQgl9Bnv99aFHnJZG6ZTJ6eqkDX640n85fD4fCb43DoDOYtv+d1K/nxcuGOw9n722cCdgp2wfEv24g+395n4dit+ylzojc5rD4j4LQAwMDA/w+cLUSfz4dJr+7nzYbefLOwWMoNpfaNKf+oEb8PGsKy19r0uUCqkbuhadv9Tai7yI4GbxFnl43cFU1mJ88Dv24WJLzBq8Py07uQZNZaS3ntzp8tO6toEiTBNp5DzUxJsEkeEE6EJLM/NuO6Wf1F+GoVSe9C0noO62Z2hNeOH558FEfWf6mb3pM7M+1S6J1J2tG0Vvvh8+lXIr8zx3ZtmrW3ScoRzzuOLJ7WQ7ATVcHvzHFePb9wWLZ83nC0161q+Y2fizHu6mDWskqVMzNZtfyMVFSjykxHa1GlgF5xtNeVOOXezKp+AM9gZtsrnWCwq0qDYgC2Lttbfck3AwFBPo7MLHU2utvMM/CUojCTOO73hycs+nGUmA4ck1KZmQJbladUJ4tMA5iSg2S4nc2D8ah3PYF67sgPgtagvVztIv7M2Viyflm2seOoE0zZWfF7J3BlkWxv3Nl+QKbwhDmlSGp3qfwQnJ4VL+cZhGn8svow1CUWYFM8QXevOICcnrmeBdl/YbJcKAfSfDIWbTb8oRpBPnq7dl673G1tFoYiSbYeFUowiFUIpsO3yTF612itHDWObFikgzNJFAimw1eEBui1F0ralX08+DKvECbyHwTmrApT4uFeZUayqKgfDB3pr3F+2+LeKEdrrzAhIZoU8mOhKfspLp/bwr3+1l7u4UNSBEX5CIKxL3T8LgjWhvSnzccpSgkCG5aWuB30ZaL6+ChOZEqm3JCtt5F5ivCgumlJCHIBLdbwfoO/l/hykDxCMYjEd2fRoDAqJF4kxphF+YPikdiT4QF3JXmT8Vo8jKyf9zF6OzFBa1PVGt9MPBvZMF9M3BVHEywuxtwqIRDH3mydS9stRTcFKDGXgMBdCSWVbXPcsyMkaLULJyHBRmj+2SzzDSeW4IZg1rBSMhB5j2BkfSJfZCfYR8XLJCcEfYFYQZLNc/TWgpuxRSluqBy+SN+wXSbNvhHeqmQ3hoYromhnyU6FAoeX7WusdOkJZAsMdfM1EkxCyKOXi4O3ElBcKC/4P9N3Yduaa5U8gR/Cloo3eRHco04RPcGjfUkAtUjVpyMmti/58VXg0qlbSJTklBYDttOi+tOn7aK9VPj+gH5DsSa1dGNSysCS+yIuqUfBrMWTwRCSLiVbS79MRhTZPb8S0SYjDSZLu7fIt1PGglZ+bMmBiCTKhlTFWqjRv6BthsQozm3q1fQ1K70eUdoGQKgP+9TXrApTFmqYUxGxMN4nvRmm1SQ8gZqKYNHBnRdTryVb7FUNXPJpV+R3ptRbMWsKecUgrSJQj+tRszBHmqcSULab1PuUv8YWGspoCu+DGhJiEAm5BkMbb+0eg2wzMSRsYa5sa0V4xcUOLHQlg/p0ou9esqcWsX6LWrcxoZl0VTMnEMoGYsQFIxKI0C+/KvcB9Ajnze58/yihZ9j3j2oFamCG3z45p4a7hqfOApcaxG+ONKFnpAFl7ZgRD/5+9zmfsIWLWp46C4i0Czh3bsoBN4ZQ056qLCBmon2XdBniL+JDi/ShGEQszJ5vP0UIs4Zh4XfggSJYN0tkeNwEpsbuzF8EKnZuhw+0XtknEsQUe736iI97bEyPvdRS4MkXcK6USAfVpPBR30NnAhEn2lcDhC8Y6u1zXwM3GFdGv4caTbA0WYiRA8/UQ/T1gQAX0l2Nz5wN3QUupl9DhLt2rPKyp/wgxPRwuf6KjnEzjOEJLYygAV9LbbgUN0dIOVBtCs756gSdhs3RpClwMYVzlvA37pRqm0PEMMFdlnORNmoNG2PuT+iiSbeLRURlWOcsKYY1OhE/j9d6qIyyCqrwiwRq8SA5RlATfJI2yFakICbicQFjgKnSK4+nGcA9z1PaFA2RmzYNn572qDZZppc+0UsNSEHdArWI7I1f6f6DaiHtKhNkCFFVk6a+0VTVTXzcDIwxiwimx6+gQyhdj3lxHLNaSLZ44Jlhm49UC1Wl0gK4DtaupFTIojk0RkyXL14whuyPnCHytVIhY4h6NfaA0kH36xoNYIi612kQ/Ae9IE1268cQt+u/np7eUHMoDQ71Y4gueKcM//0pDPHp9iu3S6MfQzS64Ay76Pr9j2KIGkp5fYJ+DNsEQw/dtyiPf/VjiG56TRmiqcQfxRDPFv/HsEkMhYnGH8Hw58/D/xj+x7Ay5GaIJ/ylBXv6MaR8mi5aM/WT/FJ8q9OPYvjz48M39EIDGZIx/s/P0+DUl81jiPaTSHNt+ASVLj3pxxDPl86JjbE3lYsNYYjWYKZlUQG6ZiNdt9COIb5EyjiPEb5mI1t70o4hvvaUeOT6oayaRjuGIUrjuJsCN/kyp6ZzPPWvSthihngxRroGnHMd321VDvHEwRdmlumlww8oieKKBq17Om0rQRfADaO2hl75gG9JOPVXwLc8Na0mCt0xAtFJsnFD0rCCGtRnO9e1EbWJum88vAMeyJ8X63FVI+guoSFa+FQ7LzARNcINKmQni/HPfksXL06Ud1zSCGipCSSSyw2yF6hTerUFkditoPku7mugmUTD/nI90bIog0ljRH2A7y60v6qAiX1PTmPENECF9LoKmNi71pgaU0KTXpWuobVtPNCv75kzAa8nOda0XUB0/ZCGwZoADX7vamTx3W1N8U3xbp2329VxQYakEZXCI2IX80105BP78RvhuRG7uu5MAbHhO9a6Oc0JuK375nVOib4Y2rc24Y+u1oPHxbsQNqC3CdVlDu51CNHhGjRqy4qDaBR41/jjie4xpPsgUr0e7W/9IKhP6p6RIoYQ88eIbkQw1LSl4AmEIjVsZBHbJZq7gdY2kerXhsZFRMdTiDQOoqjO3njjRLx3hMqKd32gTkog+s4QZ0donFekegkj/eiOIBYwDKZrdwWyf+l9n68vUD2ydVU2VA9aOl+PR5JpFKVlpxrywCabtuHUKS4K/firRw8P28UmHN+ab+jZBoQ+40DUwIsaRJVzIyrGnJJRcZ63Rb4X9XN4qgHZV1+WPyMPGxI0Oq8D3bxnIwiO0QGtpiI9CaW1TkSIkU5FjTrwdehjWKS2m2w9r5NVFJwzo3DGAeW78W/3NYkyWuRJiGo6nz7ZjK21UKhj6tgH1TjIp8+K1EKhPn5ml+gEUg0o0naCP55qZlBwAl/tizVd0cMpv3/B+YcAyxIfX44uedBTWm2orgnJQ5HSo6rrHEXRCGbLXgvelMH2tS3XiI53VDs37wsuafePFGtaVhyJT7jN9uInRPb0fLNavBvh4dzZT/YTHlrNkhp81EkiIgjZVx/EB487lVeiTEVSlat7fJc4D+Lyzqo9W93bis9Wz+WJCA9Q5jeNK2zp5u8EZzCnEUU+h3kcCymCtalqWapjil927qAnoM/NPVJk60oaZLoroYRyacqv2ieiI+nTe0cVrJ/OxaL04Ll3ZMrucndjX3JUPFpRJzleHsF5TB/MhTo6HUazXeJs7E4ToYpJQ8JHTTN5GObXT8CuNPMfilXocQQf//EXGUV+/bmUFcZgL5kjqT4vohpmIBNUrlSdbeFadbyyZAPIR7CYch+ZujlxXBbqjQdbOb8C5uAFUnVz5GhuC1u9mTw7cn7cTBSnAEKJXTxztNaFCM1gZyjw4wFOkethrUhsdS8cWbJ5UFiDpalCL/VkilVvgcSx+EvSWndyOwHj9k5h+p0IDouOwn1BmvKWI5+R604O1RpM13z2KW4RZ+vig7feSvHtHkk6i00WZ6obLmNLmV6a8CvFkdpIbf8NSTDXs4n8TXfdcLNzmDq91M6XVf4yV9I3V2+as9xtZ/Ng7Luu513lwjyv5478IJjPtkMTsrAz0oimvCzReGdnbKXAx5LzdJIoiuO4/wX+RxQlzvFi1jva+1Kj0iySes0TR45bsdJzYBNx9qZkANuVX0boLnO9+0LArFklKwphP+tsLAZgL6qqW+rOnOpFFVhUZRY6eFU2/wWBwbbiOolBXKWogj2s/kiR7kwxCCiAH4vq2VfuLlUDgQf5xe3a1mSDlVG2ygE7mdW6zzNYsTLHEWynXn4p/HeVnEouMNafarHF050OoXiS/JavGlVDTrZWscYDbPNds40sbrufPRKi6PHhG2ghnnfwf39myERQ7IAZn53atQuJ8fRfy84/J4HZzutBM+n8htH8PbZzsOTs7I9lqO/o3cAd/InUMxSnTEf8J08Ksk6MwsPqM2H2sYMkRY1zsyH55/WgkJTTE24wn72/DTnRFOwv0j/BjP/3PgsDTarHH4Ln+a1w/jL9/evXr98pDoMwcD2vimqV/wMxvd5zSA4EeAAAAABJRU5ErkJggg=="
             alt="minus"
           />
-          <h2 className="number-count">{pizzaCount}</h2>
+          <h2 className={`number-count ${theme ? 'count-dark' : ''}`}>{pizzaCount}</h2>
           <Image
             width={100}
             height={100}
@@ -64,7 +65,7 @@ const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
           />
         </div>
         <div className="money-text">
-          <h2>{price} ₽</h2>
+          <h2 className={`${theme ? 'price-text-dark' : ''}`}>{price} ₽</h2>
         </div>
         <div className="remove-icon" onClick={removeFromCart}>
           <Image

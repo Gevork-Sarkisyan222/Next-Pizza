@@ -9,9 +9,17 @@ import Link from 'next/link';
 import { Category } from '../page';
 import Image from 'next/image';
 import { setOpenMenu, setCloseMenu } from '../redux/slices/openMenu.slice';
+import {
+  setChangeTheme,
+  setChangeThemeLight,
+  setChangeThemeDark,
+} from '../redux/slices/changeTheme.slice';
+
+// theme icons
+import SunIcon from '@mui/icons-material/WbSunny';
+import MoonIcon from '@mui/icons-material/DarkMode';
 
 interface AppBarProps {
-  setSelectCategory?: (category: Category) => void;
   setOpenMeatPizza?: (value: boolean) => void;
   setOpenVeganPizza?: (value: boolean) => void;
   setOpenGrillPizza?: (value: boolean) => void;
@@ -23,7 +31,6 @@ interface AppBarProps {
 }
 
 const AppBar: React.FC<AppBarProps> = ({
-  setSelectCategory,
   setOpenMeatPizza,
   setOpenVeganPizza,
   setOpenGrillPizza,
@@ -37,6 +44,12 @@ const AppBar: React.FC<AppBarProps> = ({
   const inputState = useSelector((state: any) => state.inputState.inputState);
   const openMenu = useSelector((state: any) => state.openMenu.openMenu);
   const [isScrollHidden, setIsScrollHidden] = useState(false);
+
+  // themes change
+  const [changeColors, setChangeColors] = useState(false);
+  const [changeBackgroundImageTheme, setChangeBackgroundImageTheme] = useState(false);
+  const theme = useSelector((state: any) => state.changeTheme.theme);
+  // ===================================================
 
   const handleOpenMobileMenu = () => {
     window.scrollTo({
@@ -98,6 +111,44 @@ const AppBar: React.FC<AppBarProps> = ({
     setIsScrollHidden(false);
   };
 
+  const handleChangeTheme = () => {
+    dispatch(setChangeTheme());
+    setChangeColors((prev) => !prev);
+
+    document.querySelectorAll('h1').forEach((h1) => {
+      h1.style.color = changeColors ? 'black' : 'white';
+    });
+    document.querySelectorAll('h2').forEach((h2) => {
+      h2.style.color = changeColors ? 'black' : 'white';
+    });
+
+    setChangeBackgroundImageTheme((prev) => !prev);
+    const body = document.querySelector('body');
+    if (body) {
+      body.style.backgroundImage = changeBackgroundImageTheme
+        ? 'url("https://img.freepik.com/premium-vector/seamless-pattern-with-classical-italian-foods_80590-1174.jpg?w=740")'
+        : 'url("https://static.vecteezy.com/system/resources/previews/014/252/534/non_2x/slice-of-pizza-on-a-thin-crust-on-a-black-background-illustration-pattern-pizza-stuffed-with-meat-mushrooms-and-herbs-pattern-kitchen-decoration-stylish-wallpaper-vector.jpg")';
+    }
+  };
+
+  const handleChangeThemeToLight = () => {
+    const bodyFind = document.querySelector('body');
+    if (bodyFind) {
+      bodyFind.style.backgroundImage =
+        'url("https://img.freepik.com/premium-vector/seamless-pattern-with-classical-italian-foods_80590-1174.jpg?w=740")';
+    }
+    dispatch(setChangeThemeLight());
+  };
+
+  const handleChangeThemeToDark = () => {
+    const bodyFind = document.querySelector('body');
+    if (bodyFind) {
+      bodyFind.style.backgroundImage =
+        'url("https://static.vecteezy.com/system/resources/previews/014/252/534/non_2x/slice-of-pizza-on-a-thin-crust-on-a-black-background-illustration-pattern-pizza-stuffed-with-meat-mushrooms-and-herbs-pattern-kitchen-decoration-stylish-wallpaper-vector.jpg")';
+    }
+    dispatch(setChangeThemeDark());
+  };
+
   return (
     <>
       <div className="AppBar">
@@ -108,7 +159,7 @@ const AppBar: React.FC<AppBarProps> = ({
             src="https://react-pizza-v2.vercel.app/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg"
             alt="app image"
           />
-          <h1>NEXT PIZZA</h1>
+          <h1 className={`${theme ? 'dark-mode-h1' : ''}`}>NEXT PIZZA</h1>
           <p>самая вкусная пицца во вселенной</p>
         </section>
         {inputState && (
@@ -140,8 +191,8 @@ const AppBar: React.FC<AppBarProps> = ({
           alt="menu icon"
         />
         {openMenu && (
-          <div className="menu">
-            <h2>Меню</h2>
+          <div className={`menu ${theme ? 'dark-menu' : ''}`}>
+            <h2 className={`${theme ? 'menu-text-dark' : ''}`}>Меню</h2>
             <Image
               width={100}
               height={100}
@@ -176,7 +227,7 @@ const AppBar: React.FC<AppBarProps> = ({
                   <button>Готовка</button>
                 </a>
                 <div className="menu-sort-content">
-                  <h3>сортировка</h3>
+                  <h3 className={`${theme ? 'sort-text-dark' : ''}`}>сортировка</h3>
 
                   <div className="sort-buttons">
                     <button onClick={handleOpenCheapPizzas}>Дешевые пиццы</button>
@@ -184,12 +235,27 @@ const AppBar: React.FC<AppBarProps> = ({
                   </div>
                 </div>
               </div>
+              <div className="theme-container">
+                <button onClick={handleChangeThemeToLight}>
+                  <SunIcon />
+                </button>
+                <button onClick={handleChangeThemeToDark}>
+                  <MoonIcon />
+                </button>
+              </div>
             </div>
           </div>
         )}
 
         <div className="select-button">
-          <span className="price-span">2023 ₽</span>
+          <div className="dark-light-theme">
+            <label className="ui-switch">
+              <input onClick={handleChangeTheme} type="checkbox" />
+              <div className="slider">
+                <div className="circle"></div>
+              </div>
+            </label>
+          </div>
           <div className="line"></div>
           <Link href={'/cart'}>
             <Image
