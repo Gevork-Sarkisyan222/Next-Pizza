@@ -200,7 +200,7 @@ const AppBar: React.FC<AppBarProps> = ({
           timeout={300}
           classNames="fade"
           unmountOnExit>
-          <div className="Menu-Main">
+          <>
             {openMenu && (
               <div ref={menuRef} className={`menu ${theme ? 'dark-menu' : ''}`}>
                 <h2 className={`${theme ? 'menu-text-dark' : ''}`}>Меню</h2>
@@ -258,7 +258,7 @@ const AppBar: React.FC<AppBarProps> = ({
                 </div>
               </div>
             )}
-          </div>
+          </>
         </CSSTransition>
 
         <div className="select-button">
