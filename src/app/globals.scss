@@ -137,6 +137,14 @@ body {
   font-style: normal;
 }
 
+.not-found-content {
+  h1 {
+    &.black-not-found-text {
+      color: white;
+    }
+  }
+}
+
 @media (max-width: 804px) {
   .not-found-content {
     width: 100%;
