@@ -18,6 +18,7 @@ import {
 // theme icons
 import SunIcon from '@mui/icons-material/WbSunny';
 import MoonIcon from '@mui/icons-material/DarkMode';
+import { CSSTransition } from 'react-transition-group';
 
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
@@ -149,6 +150,8 @@ const AppBar: React.FC<AppBarProps> = ({
     dispatch(setChangeThemeDark());
   };
 
+  const menuRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <>
       <div className="AppBar">
@@ -190,63 +193,73 @@ const AppBar: React.FC<AppBarProps> = ({
           src="https://cdn-icons-png.flaticon.com/512/8771/8771165.png"
           alt="menu icon"
         />
-        {openMenu && (
-          <div className={`menu ${theme ? 'dark-menu' : ''}`}>
-            <h2 className={`${theme ? 'menu-text-dark' : ''}`}>Меню</h2>
-            <Image
-              width={100}
-              height={100}
-              className="close-menu-icon"
-              onClick={handleCloseMobileMenu}
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Grey_close_x.svg/768px-Grey_close_x.svg.png"
-              alt="close-menu icon"
-            />
-            <div className="menu-content">
-              <div className="menu-buttons">
+
+        <CSSTransition
+          menuRef={menuRef}
+          in={openMenu}
+          timeout={300}
+          classNames="fade"
+          unmountOnExit>
+          <div className="Menu-Main">
+            {openMenu && (
+              <div ref={menuRef} className={`menu ${theme ? 'dark-menu' : ''}`}>
+                <h2 className={`${theme ? 'menu-text-dark' : ''}`}>Меню</h2>
                 <Image
                   width={100}
                   height={100}
-                  className="lope-icon-mobile"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG6vj-vkOjV4QcV6_JEWS3bCAISpV6yZEspw&usqp=CAU"
-                  alt="lope icon for mobile device"
+                  className="close-menu-icon"
+                  onClick={handleCloseMobileMenu}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Grey_close_x.svg/768px-Grey_close_x.svg.png"
+                  alt="close-menu icon"
                 />
-                <input
-                  value={value}
-                  onChange={onChangeValue}
-                  className="menu-input"
-                  type="text"
-                  placeholder="Поиск пицц..."
-                />
-                <Link onClick={handleCloseMobileMenu} href={'/cart'}>
-                  <button>Корзина</button>
-                </Link>
-                <a href="https://dc.kh.ua/samye-populjarnye-vidy-piccy/" target="_blank">
-                  <button>Топ пиццы</button>
-                </a>
-                <a href="https://www.youtube.com/watch?v=YqCcjFtPOIM" target="_blank">
-                  <button>Готовка</button>
-                </a>
+                <div className="menu-content">
+                  <div className="menu-buttons">
+                    <Image
+                      width={100}
+                      height={100}
+                      className="lope-icon-mobile"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG6vj-vkOjV4QcV6_JEWS3bCAISpV6yZEspw&usqp=CAU"
+                      alt="lope icon for mobile device"
+                    />
+                    <input
+                      value={value}
+                      onChange={onChangeValue}
+                      className="menu-input"
+                      type="text"
+                      placeholder="Поиск пицц..."
+                    />
+                    <Link onClick={handleCloseMobileMenu} href={'/cart'}>
+                      <button>Корзина</button>
+                    </Link>
+                    <a href="https://dc.kh.ua/samye-populjarnye-vidy-piccy/" target="_blank">
+                      <button>Топ пиццы</button>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=YqCcjFtPOIM" target="_blank">
+                      <button>Готовка</button>
+                    </a>
 
-                <div className="menu-sort-content">
-                  <h3 className={`${theme ? 'sort-text-dark' : ''}`}>сортировка</h3>
+                    <div className="menu-sort-content">
+                      <h3 className={`${theme ? 'sort-text-dark' : ''}`}>сортировка</h3>
 
-                  <div className="sort-buttons">
-                    <button onClick={handleOpenCheapPizzas}>Дешевые пиццы</button>
-                    <button onClick={handleOpenExpenisvePizzas}>Дорогие пиццы</button>
+                      <div className="sort-buttons">
+                        <button onClick={handleOpenCheapPizzas}>Дешевые пиццы</button>
+                        <button onClick={handleOpenExpenisvePizzas}>Дорогие пиццы</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="theme-container">
+                    <button className="light-button" onClick={handleChangeThemeToLight}>
+                      <SunIcon />
+                    </button>
+                    <button className="dark-button" onClick={handleChangeThemeToDark}>
+                      <MoonIcon />
+                    </button>
                   </div>
                 </div>
               </div>
-              <div className="theme-container">
-                <button className="light-button" onClick={handleChangeThemeToLight}>
-                  <SunIcon />
-                </button>
-                <button className="dark-button" onClick={handleChangeThemeToDark}>
-                  <MoonIcon />
-                </button>
-              </div>
-            </div>
+            )}
           </div>
-        )}
+        </CSSTransition>
 
         <div className="select-button">
           <div className="dark-light-theme">
@@ -258,7 +271,7 @@ const AppBar: React.FC<AppBarProps> = ({
             </label>
           </div>
           <div className="line"></div>
-          <Link href={'/cart'}>
+          <Link onClick={handleChangeThemeToLight} href={'/cart'}>
             <Image
               width={100}
               height={100}

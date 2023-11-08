@@ -657,136 +657,186 @@ body {
     }
   }
 
-  .menu {
-    width: 291px;
-    height: 100vh;
-    background-color: #ffebb8;
-    position: absolute;
-    right: 0;
+  .Menu-Main {
+    opacity: 1;
+    transform: translateX(-200px);
+    transition: opacity 0.3s, transform 0.3s;
     z-index: 4;
-    top: 0;
-    display: none;
 
-    &.dark-menu {
-      background: linear-gradient(0deg, #454545 1%, #242424 81%);
+    &.fade-enter {
+      opacity: 0;
+      transform: translateX(-200px);
     }
 
-    @media (max-width: 614px) {
-      display: block;
+    &.fade-enter-active {
+      opacity: 1;
+      transform: translateX(0);
     }
 
-    h2 {
+    &.fade-exit {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    &.fade-exit-active {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    .menu {
+      width: 291px;
+      height: 100vh;
+      background-color: #ffebb8;
       position: absolute;
-      color: black;
-      margin: 20px;
+      right: -211px;
+      top: -46px;
+      display: none;
 
-      &.menu-text-dark {
-        color: white;
+      // opacity: 1;
+      // transform: translateX(-200px);
+      // transition: opacity 0.3s, transform 0.3s;
+
+      // &.fade-enter {
+      //   opacity: 0;
+      //   transform: translateX(-200px);
+      // }
+
+      // &.fade-enter-active {
+      //   opacity: 1;
+      //   transform: translateX(0);
+      // }
+
+      // &.fade-exit {
+      //   opacity: 1;
+      //   transform: translateX(0);
+      // }
+
+      // &.fade-exit-active {
+      //   opacity: 0;
+      //   transform: translateX(-20px);
+      // }
+
+      &.dark-menu {
+        background: linear-gradient(0deg, #454545 1%, #242424 81%);
       }
-    }
 
-    .close-menu-icon {
-      position: absolute;
-      right: 18px;
-      top: 9px;
-      width: 33px;
-      height: 33px;
-      cursor: pointer;
-    }
+      @media (max-width: 614px) {
+        display: block;
+      }
 
-    .menu-content {
-      display: flex;
-      justify-content: center;
-
-      .theme-container {
-        display: flex;
-        gap: 27px;
+      h2 {
         position: absolute;
-        top: 438px;
+        color: black;
+        margin: 20px;
 
-        .light-button {
-          &:hover {
-            background: rgb(207, 207, 207);
-          }
-        }
-
-        .dark-button {
-          &:hover {
-            background: black;
-          }
-        }
-
-        button {
-          width: 70px;
-          height: 37px;
-          border-radius: 20px;
-          border: none;
-          background: orange;
+        &.menu-text-dark {
           color: white;
-          cursor: pointer;
         }
       }
 
-      .menu-buttons {
+      .close-menu-icon {
+        position: absolute;
+        right: 18px;
+        top: 9px;
+        width: 33px;
+        height: 33px;
+        cursor: pointer;
+      }
+
+      .menu-content {
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        margin-top: 89px;
-        gap: 15px;
+        justify-content: center;
 
-        .lope-icon-mobile {
-          width: 19px;
-          height: 19px;
-          position: absolute;
-          top: 82px;
-          left: 57px;
-          z-index: 2;
-        }
-
-        .menu-input {
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-          background: #fffdf3;
-          font-size: 16px;
-          padding: 12px 20px 12px 42px;
-          width: 145px;
-          height: 8px;
-          position: relative;
-          top: -14px;
-        }
-
-        .menu-sort-content {
+        .theme-container {
           display: flex;
-          justify-content: center;
+          gap: 27px;
+          position: absolute;
+          top: 438px;
 
-          h3 {
-            &.sort-text-dark {
-              color: white;
+          .light-button {
+            &:hover {
+              background: rgb(207, 207, 207);
             }
           }
 
-          .sort-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: absolute;
-            top: 332px;
+          .dark-button {
+            &:hover {
+              background: black;
+            }
+          }
+
+          button {
+            width: 70px;
+            height: 37px;
+            border-radius: 20px;
+            border: none;
+            background: orange;
+            color: white;
+            cursor: pointer;
           }
         }
 
-        button {
-          width: 209px;
-          border-radius: 8px;
-          border: none;
-          height: 30px;
-          --tw-text-opacity: 1;
-          color: rgb(250 250 249 / var(--tw-text-opacity));
-          background-color: orange;
-          cursor: pointer;
+        .menu-buttons {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          margin-top: 89px;
+          gap: 15px;
 
-          &:hover {
-            transition: 500ms;
-            background-color: rgb(255, 181, 44);
+          .lope-icon-mobile {
+            width: 19px;
+            height: 19px;
+            position: absolute;
+            top: 82px;
+            left: 57px;
+            z-index: 2;
+          }
+
+          .menu-input {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background: #fffdf3;
+            font-size: 16px;
+            padding: 12px 20px 12px 42px;
+            width: 145px;
+            height: 8px;
+            position: relative;
+            top: -14px;
+          }
+
+          .menu-sort-content {
+            display: flex;
+            justify-content: center;
+
+            h3 {
+              &.sort-text-dark {
+                color: white;
+              }
+            }
+
+            .sort-buttons {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              position: absolute;
+              top: 332px;
+            }
+          }
+
+          button {
+            width: 209px;
+            border-radius: 8px;
+            border: none;
+            height: 30px;
+            --tw-text-opacity: 1;
+            color: rgb(250 250 249 / var(--tw-text-opacity));
+            background-color: orange;
+            cursor: pointer;
+
+            &:hover {
+              transition: 500ms;
+              background-color: rgb(255, 181, 44);
+            }
           }
         }
       }

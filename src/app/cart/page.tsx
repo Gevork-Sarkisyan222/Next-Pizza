@@ -11,6 +11,7 @@ import { pizzas } from '../redux/slices/cart.slice';
 import { clearCart } from '../redux/slices/cart.slice';
 import { clearAllChecked } from '../redux/slices/checked.slice';
 import Image from 'next/image';
+import { setChangeThemeLight } from '../redux/slices/changeTheme.slice';
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.cart);
@@ -36,6 +37,15 @@ const Cart = () => {
     dispatch(clearAllChecked());
   };
 
+  const handleChangeThemeToLightInCart = () => {
+    const bodyFind = document.querySelector('body');
+    if (bodyFind) {
+      bodyFind.style.backgroundImage =
+        'url("https://img.freepik.com/premium-vector/seamless-pattern-with-classical-italian-foods_80590-1174.jpg?w=740")';
+    }
+    dispatch(setChangeThemeLight());
+  };
+
   const renderCart = () => {
     if (cart.length === 0) {
       return (
@@ -56,8 +66,11 @@ const Cart = () => {
                   src="https://cdni.iconscout.com/illustration/free/thumb/free-empty-cart-4085814-3385483.png"
                   alt="empty-cart"
                 />
+                <Link onClick={handleChangeThemeToLightInCart} href={'/'}>
+                  <button className="back-button-pc">Вернуться назад</button>
+                </Link>
                 <Link href={'/'}>
-                  <button>Вернуться назад</button>
+                  <button className="back-button-mobile">Вернуться назад</button>
                 </Link>
               </div>
             </div>

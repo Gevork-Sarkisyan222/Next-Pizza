@@ -959,8 +959,6 @@ export default function Home() {
                 <h3 onClick={handleAllSortPopularnosty}>популярности</h3>
                 <h3 onClick={handleOpenCheapPizzas}>самые дешевые</h3>
                 <h3 onClick={handleOpenExpenisvePizzas}>самые дорогие</h3>
-                <button>light</button>
-                <button>dark</button>
               </div>
             </div>
           )}
