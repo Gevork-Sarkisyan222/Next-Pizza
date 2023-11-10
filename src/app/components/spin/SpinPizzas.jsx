@@ -1,5 +1,5 @@
-'use client';
-import React, { useState } from 'react';
+// 'use client';
+import React, { useState, useMemo, useEffect } from 'react';
 import './spin.scss';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,65 +10,81 @@ const cells = 31;
 const items = [
   {
     name: 'Price',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/f8bcc0d18f5a4817a720a159f0f8c37c_292x292.webp',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/ComboTemplates/ee7881d13c9e495f934f7670faf6959d_292x292.webp',
     chance: 10,
   },
   {
     name: 'Price2',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/ddadb2bd7f2d40459acddbe2f51a2389_292x292.webp',
-    chance: 25,
-  },
-  {
-    name: 'Price3',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/bebaa13644304e75b438e45be9eb5076_292x292.webp',
-    chance: 12,
-  },
-  {
-    name: 'Price4',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/fa54ea6a78ed4bb89f9788b691d4ad56_292x292.webp',
-    chance: 13,
-  },
-  {
-    name: 'Price5',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/cd83a5cb97f74df99ec47e7bfba1fb7d_292x292.webp',
-    chance: 14,
-  },
-  {
-    name: 'Price6',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/ComboTemplates/7ea7a45d9a03453783c3f75f2feea2e9_292x292.webp',
-    chance: 15,
-  },
-  {
-    name: 'Price7',
     img: 'https://dodopizza-a.akamaihd.net/static/Img/ComboTemplates/f2751f0e30db461d8179689de11b586b_292x292.webp',
-    chance: 16,
-  },
-  {
-    name: 'Price8',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/ComboTemplates/8655eb0d49d44ff49af1493036e766d4_292x292.webp',
-    chance: 17,
-  },
-  {
-    name: 'Price9',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/ComboTemplates/9c76b48d74d847dd8be8b3c49f7cdcf0_292x292.webp',
-    chance: 18,
-  },
-  {
-    name: 'Price10',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/e2e2565aa8cc4ac89241a6baca6dc512_292x292.webp',
-    chance: 19,
-  },
-  {
-    name: 'Price11',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/519019eabffe4694bff8b727ccac898f_292x292.webp',
     chance: 20,
   },
   {
-    name: 'Price12',
-    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/519019eabffe4694bff8b727ccac898f_292x292.webp',
-    chance: 66,
+    name: 'Price3',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/ComboTemplates/7ea7a45d9a03453783c3f75f2feea2e9_292x292.webp',
+    chance: 30,
+  },
+  {
+    name: 'Price4',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/ComboTemplates/9c76b48d74d847dd8be8b3c49f7cdcf0_292x292.webp',
+    chance: 40,
+  },
+  {
+    name: 'Price5',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/bebaa13644304e75b438e45be9eb5076_292x292.webp',
+    chance: 50,
+  },
+  {
+    name: 'Price6',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/6046174c06e440299c4e7117a8ecfea4_292x292.webp',
+    chance: 60,
+  },
+  {
+    name: 'Price7',
+    img: 'https://www.shakeyspizza.ph/images/supercard-gold.png',
+    chance: 70,
+  },
+  {
+    name: 'Price8',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/7d8acee0f9984844bdeb3e22d359a4fc_292x292.webp',
+    chance: 80,
+  },
+  {
+    name: 'Price9',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/fa54ea6a78ed4bb89f9788b691d4ad56_292x292.webp',
+    chance: 90,
+  },
+  {
+    name: 'Price10',
+    img: 'https://dodopizza-a.akamaihd.net/static/Img/Products/cd83a5cb97f74df99ec47e7bfba1fb7d_292x292.webp',
+    chance: 100,
   },
 ];
+
+const ListItem = ({ item }) => {
+  return (
+    <li data-item={JSON.stringify(item)} className="list__item">
+      <Image width={200} height={200} src={item.img} alt="images of case" />
+    </li>
+  );
+};
+
+// Перемещаем getItem выше его использования
+const getItem = () => {
+  let item;
+
+  while (!item) {
+    const chance = Math.floor(Math.random() * 100);
+
+    items.forEach((elm) => {
+      if (chance < elm.chance && !item) item = elm;
+    });
+  }
+
+  return item;
+};
+
+// Обертка ListItem с использованием React.memo
+const MemoizedListItem = React.memo(ListItem);
 
 function SpinPizzas() {
   const [isStarted, setIsStarted] = useState(false);
@@ -76,35 +92,17 @@ function SpinPizzas() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.changeTheme.theme);
 
-  const generateItems = () => {
+  const generateItems = useMemo(() => {
     const list = [];
 
     for (let i = 0; i < cells; i++) {
       const item = getItem();
 
-      list.push(
-        <li key={i} data-item={JSON.stringify(item)} className="list__item">
-          <Image width={200} height={200} src={item.img} alt="images of case" />
-        </li>,
-      );
+      list.push(<MemoizedListItem key={i} item={item} />);
     }
 
     return list;
-  };
-
-  const getItem = () => {
-    let item;
-
-    while (!item) {
-      const chance = Math.floor(Math.random() * 100);
-
-      items.forEach((elm) => {
-        if (chance < elm.chance && !item) item = elm;
-      });
-    }
-
-    return item;
-  };
+  }, []); // Зависимости отсутствуют, поэтому useMemo вызывается только один раз
 
   const start = () => {
     if (isStarted) return;
@@ -135,7 +133,7 @@ function SpinPizzas() {
 
     setTimeout(() => {
       alert('Поздравляем с выигрышем');
-      // window.location.reload();
+      window.location.reload();
     }, 5500);
   };
 
@@ -143,6 +141,22 @@ function SpinPizzas() {
     document.body.style.overflow = 'auto';
     dispatch(setCloseSpin());
   };
+
+  // Обработчик для кнопки с использованием обычного JavaScript
+  const handleButtonClick = () => {
+    start();
+  };
+
+  useEffect(() => {
+    // Получаем кнопку и добавляем обработчик события
+    const button = document.querySelector('.start');
+    button.addEventListener('click', handleButtonClick);
+
+    // Очистка обработчика при размонтировании компонента
+    return () => {
+      button.removeEventListener('click', handleButtonClick);
+    };
+  }, []); // Пустой массив зависимостей означает, что useEffect вызывается только один раз после монтирования
 
   return (
     <div className="SpinPizzas-Main">
@@ -156,7 +170,7 @@ function SpinPizzas() {
           alt="close-menu icon"
         />
         <div className="spin-pizza-content">
-          <h1>Крутите и выграйте пиццы</h1>
+          <h1>Крутите и выигрывайте пиццы</h1>
 
           <section className="spin-container">
             <div className="app">
@@ -168,11 +182,9 @@ function SpinPizzas() {
                 alt="mark icon"
               />
               <div className="scope">
-                <ul className="list">{generateItems()}</ul>
+                <ul className="list">{generateItems}</ul>
               </div>
-              <button onClick={start} className={`start ${theme ? 'dark-start-button' : ''}`}>
-                Крутить 800р
-              </button>
+              <button className={`start ${theme ? 'dark-start-button' : ''}`}>Крутить 800р</button>
             </div>
           </section>
         </div>
