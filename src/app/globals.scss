@@ -4,6 +4,12 @@ body {
   background-image: url('https://img.freepik.com/premium-vector/seamless-pattern-with-classical-italian-foods_80590-1174.jpg?w=740');
 }
 
+.spin-btn-text-hover {
+  &:hover {
+    color: white !important;
+  }
+}
+
 // black background
 .black-bg {
   width: 100%;
@@ -394,6 +400,10 @@ body {
           text-decoration: underline;
 
           @media (max-width: 784px) {
+            display: none;
+          }
+
+          @media (max-width: 784px) {
             color: #fe5f1e;
             text-decoration: underline;
             margin-top: -135px;
@@ -670,7 +680,7 @@ body {
     height: 100vh;
     background-color: #ffebb8;
     position: absolute;
-    right: -200px;
+    right: -201px;
     top: 0;
     display: none;
     z-index: 4;

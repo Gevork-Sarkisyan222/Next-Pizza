@@ -13,7 +13,7 @@ interface IinitState {
   cart: pizzas[];
 }
 
-const isBrowser = typeof window !== 'undefined'; // Проверяем, запущено ли в браузере
+const isBrowser = typeof window !== 'undefined';
 const savedCart = isBrowser ? localStorage.getItem('cart') : null;
 const initialState: IinitState = {
   cart: savedCart ? JSON.parse(savedCart) : [],

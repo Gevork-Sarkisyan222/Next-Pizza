@@ -9,6 +9,7 @@ import { RootState } from './redux/slices/types/type';
 import NotFoundPizza from './components/NotFoundPizza';
 import { setInputValue, setInputValueDefalut } from './redux/slices/InputState.slice';
 import { setChangeTheme } from './redux/slices/changeTheme.slice';
+import SpinPizzas from '././components/spin/SpinPizzas';
 
 type pizza = {
   id: number;
@@ -701,6 +702,7 @@ export type Category = 'Все' | 'Мясные' | 'Вегетарианская
 export default function Home() {
   const value = useSelector((state: RootState) => state.value.value);
   const openMenu = useSelector((state: any) => state.openMenu.openMenu);
+  const openSpin = useSelector((state: any) => state.openSpin.openSpin);
 
   const dispatch = useDispatch();
 
@@ -845,8 +847,15 @@ export default function Home() {
     dispatch(setChangeTheme());
   };
 
+  React.useEffect(() => {
+    const jsonSpin = JSON.stringify(openSpin);
+    localStorage.setItem('spin', jsonSpin);
+    console.log(jsonSpin);
+  });
+
   return (
     <>
+      {openSpin && <SpinPizzas />}
       {openMenu && <div className="black-bg"></div>}
 
       <div className="main-container">

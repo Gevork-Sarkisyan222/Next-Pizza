@@ -14,11 +14,13 @@ import {
   setChangeThemeLight,
   setChangeThemeDark,
 } from '../redux/slices/changeTheme.slice';
+import Button from '@mui/material/Button';
 
 // theme icons
 import SunIcon from '@mui/icons-material/WbSunny';
 import MoonIcon from '@mui/icons-material/DarkMode';
 import { CSSTransition } from 'react-transition-group';
+import { setOpenSpin } from '../redux/slices/openSpin.slice';
 
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
@@ -152,6 +154,11 @@ const AppBar: React.FC<AppBarProps> = ({
 
   const menuRef = React.useRef<HTMLDivElement>(null);
 
+  const handleOpenSpin = () => {
+    document.body.style.overflow = 'hidden';
+    dispatch(setOpenSpin());
+  };
+
   return (
     <>
       <div className="AppBar">
@@ -282,6 +289,30 @@ const AppBar: React.FC<AppBarProps> = ({
           </Link>
         </div>
       </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button
+          sx={{
+            color: '#e08113',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 136, 0, 0.658)',
+              color: 'white',
+            },
+          }}
+          variant="text"
+          onClick={handleOpenSpin}
+          style={{ position: 'absolute' }}>
+          <Link
+            className="spin-btn-text-hover"
+            style={{
+              textDecoration: 'none',
+              color: '#e08113',
+            }}
+            href={'/'}>
+            Крутить кейсы
+          </Link>
+        </Button>
+      </div>
+
       <div className="line-content"></div>
     </>
   );

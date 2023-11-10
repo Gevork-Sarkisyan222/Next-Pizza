@@ -8,6 +8,7 @@ import checked from './slices/checked.slice';
 import inputState from './slices/InputState.slice';
 import openMenu from './slices/openMenu.slice';
 import changeTheme from './slices/changeTheme.slice';
+import openSpin from './slices/openSpin.slice';
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     inputState,
     openMenu,
     changeTheme,
+    openSpin,
   },
 });
 
