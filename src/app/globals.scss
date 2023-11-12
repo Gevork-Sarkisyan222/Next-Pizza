@@ -4,6 +4,24 @@ body {
   background-image: url('https://img.freepik.com/premium-vector/seamless-pattern-with-classical-italian-foods_80590-1174.jpg?w=740');
 }
 
+// spin animation cssTransition !!!!
+.spin-enter {
+  opacity: 0;
+}
+.spin-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+.spin-exit {
+  opacity: 1;
+}
+.spin-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+// ======================= !!!!!!!!
+
 .spin-btn-text-hover {
   &:hover {
     color: white !important;

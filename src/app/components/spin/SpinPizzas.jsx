@@ -1,4 +1,4 @@
-// 'use client';
+'use client';
 import React, { useState, useMemo, useEffect } from 'react';
 import './spin.scss';
 import Image from 'next/image';
@@ -83,7 +83,6 @@ const getItem = () => {
   return item;
 };
 
-// Обертка ListItem с использованием React.memo
 const MemoizedListItem = React.memo(ListItem);
 
 function SpinPizzas() {

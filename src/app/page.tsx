@@ -10,6 +10,8 @@ import NotFoundPizza from './components/NotFoundPizza';
 import { setInputValue, setInputValueDefalut } from './redux/slices/InputState.slice';
 import { setChangeTheme } from './redux/slices/changeTheme.slice';
 import SpinPizzas from '././components/spin/SpinPizzas';
+import { CSSTransition } from 'react-transition-group';
+import { setCloseSpin } from './redux/slices/openSpin.slice';
 
 type pizza = {
   id: number;
@@ -843,19 +845,33 @@ export default function Home() {
     dispatch(setInputValueDefalut());
   };
 
-  const handleChangeTheme = () => {
-    dispatch(setChangeTheme());
-  };
-
   React.useEffect(() => {
     const jsonSpin = JSON.stringify(openSpin);
     localStorage.setItem('spin', jsonSpin);
     console.log(jsonSpin);
   });
 
+  const spinRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <>
-      {openSpin && <SpinPizzas />}
+      <CSSTransition
+        spinRef={spinRef}
+        in={openSpin}
+        timeout={300}
+        classNames="spin"
+        unmountOnExit
+        onExited={() => {
+          dispatch(setCloseSpin());
+        }}>
+        <>
+          {openSpin && (
+            <div ref={spinRef}>
+              <SpinPizzas />
+            </div>
+          )}
+        </>
+      </CSSTransition>
       {openMenu && <div className="black-bg"></div>}
 
       <div className="main-container">
