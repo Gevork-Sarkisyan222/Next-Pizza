@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import './cart.scss';
 import AppBar from '../components/AppBar';
 import CartCard from './CartCard';
@@ -46,7 +46,16 @@ const Cart = () => {
     dispatch(setChangeThemeLight());
   };
 
-  const renderCart = () => {
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  const handleCartCardPriceChange = (newPrice: number) => {
+    setTotalPrice((prevTotalPrice) => prevTotalPrice + newPrice);
+  };
+
+  const renderCart = (
+    totalPrice: number,
+    handleCartCardPriceChange: (newPrice: number) => void,
+  ) => {
     if (cart.length === 0) {
       return (
         <>
@@ -100,16 +109,17 @@ const Cart = () => {
                 image={obj.image}
                 price={obj.price}
                 id={obj.id}
+                onPriceChange={handleCartCardPriceChange}
               />
             ))}
           </div>
         </div>
         <div className="card-down-text">
           <h2 className={`first-count-text ${theme ? 'count-text-dark ' : ''}`}>
-            Всего пицц: {cart.length} шт.
+            Всего видов: {cart.length} шт.
           </h2>
           <h2 className={`finally-price-text ${theme ? 'finally-price-text-dark' : ''}`}>
-            Сумма заказа: <span>900 ₽</span>
+            Сумма заказа: <span>{totalPrice} ₽</span>
           </h2>
         </div>
         <div className="card-down-buttons">
@@ -128,7 +138,7 @@ const Cart = () => {
     <div className="Cart-Main">
       <div className={`cart-wrapper ${theme ? 'changed-theme-cart-bg' : ''}`}>
         <AppBar />
-        {renderCart()}
+        {renderCart(totalPrice, handleCartCardPriceChange)}
       </div>
     </div>
   );

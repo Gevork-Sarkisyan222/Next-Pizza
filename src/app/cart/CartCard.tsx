@@ -12,23 +12,25 @@ interface Iprops {
   title: string;
   image: string;
   price: number;
+  onPriceChange: (newPrice: number) => void;
 }
 
-const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
+const CartCard: React.FC<Iprops> = ({ id, title, image, price, onPriceChange }) => {
   const dispatch = useDispatch();
   const [pizzaCount, setPizzaCount] = useState(1);
   const theme = useSelector((state: any) => state.changeTheme.theme);
 
   const setPizzaCountPlus = () => {
     setPizzaCount(pizzaCount + 1);
+    onPriceChange(price);
   };
 
   const setPizzaCountMinus = () => {
     if (pizzaCount > 1) {
       setPizzaCount(pizzaCount - 1);
+      onPriceChange(-price);
     }
   };
-
   const removeFromCart = () => {
     const confirmed = window.confirm('Вы действительно хотите удалить этот товар с корзины?');
 
@@ -37,6 +39,8 @@ const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
       dispatch(setCheckedFalse({ id }));
     }
   };
+
+  const totalPrice = price * pizzaCount;
 
   return (
     <div className="Cart-Card">
@@ -65,7 +69,7 @@ const CartCard: React.FC<Iprops> = ({ id, title, image, price }) => {
           />
         </div>
         <div className="money-text">
-          <h2 className={`${theme ? 'price-text-dark' : ''}`}>{price} ₽</h2>
+          <h2 className={`${theme ? 'price-text-dark' : ''}`}>{totalPrice} ₽</h2>
         </div>
         <div className="remove-icon" onClick={removeFromCart}>
           <Image
