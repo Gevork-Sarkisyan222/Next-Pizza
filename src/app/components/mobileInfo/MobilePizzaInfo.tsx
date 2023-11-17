@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Image from 'next/image';
 import Taste from '../taste/Taste';
@@ -17,20 +18,6 @@ interface MobileInfoProps {
   price: number;
   image: string;
 }
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '80%',
-  // height: '88%',
-  height: '700px',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
   openInfoMobile,
@@ -48,6 +35,22 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
       alert(`Мы передали ваш заказ под номером ${deliverNumber} курьерской службе`);
       window.location.reload();
     }
+  };
+
+  const mobileQuery = useMediaQuery('(min-height:932px)');
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    // height: '88%',
+    height: mobileQuery ? '747px' : '710px',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
   };
 
   return (
