@@ -2,7 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type pizzas = {
+export type pizzas = {
   id: number;
   image: string;
   title: string;

@@ -25,7 +25,7 @@ export type pizza = {
   cheese: boolean;
 };
 
-export const pizzas: pizza[] = [
+const pizzas: pizza[] = [
   {
     id: 1,
     image:
