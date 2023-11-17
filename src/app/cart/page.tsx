@@ -7,7 +7,7 @@ import CartCard from './CartCard';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/slices/types/cartType';
-import { pizzas } from '../redux/slices/cart.slice';
+// import { pizzas } from '../redux/slices/cart.slice';
 import { clearCart } from '../redux/slices/cart.slice';
 import { clearAllChecked } from '../redux/slices/checked.slice';
 import Image from 'next/image';
@@ -102,7 +102,7 @@ const Cart = () => {
         </div>
         <div className="d-flex">
           <div className="cart-pizza-container">
-            {cart.map((obj: pizzas) => (
+            {cart.map((obj: any) => (
               <CartCard
                 key={obj.id}
                 title={obj.title}
