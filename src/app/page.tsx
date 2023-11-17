@@ -25,7 +25,8 @@ export type pizza = {
   cheese: boolean;
 };
 
-export const pizzas: pizza[] = [
+// istex export
+const pizzas: pizza[] = [
   {
     id: 1,
     image:
