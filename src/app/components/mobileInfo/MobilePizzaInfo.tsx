@@ -83,7 +83,7 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
               <Image src={image} width={275} height={275} alt="pizza-image" />
             </div>
             <h1 style={{ fontSize: '26px', marginTop: '30px' }} className="pizza-info-mobile-title">
-              Пицца {title}
+              {title}
             </h1>
             <div className="pizzas-with-taste">
               <h3>Добавить по вкусу</h3>
