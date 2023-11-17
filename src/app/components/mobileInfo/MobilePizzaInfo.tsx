@@ -45,6 +45,7 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '80%',
+    borderRadius: '25px',
     // height: '88%',
     height: mobileQuery ? '747px' : '710px',
     bgcolor: 'background.paper',
