@@ -101,7 +101,7 @@ function SpinPizzas() {
     }
 
     return list;
-  }, []); // Зависимости отсутствуют, поэтому useMemo вызывается только один раз
+  }, []);
 
   const start = () => {
     if (isStarted) return;

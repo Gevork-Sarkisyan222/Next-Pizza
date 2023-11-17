@@ -1,12 +1,46 @@
-.Pizza-Info {
+.Pizza-Info-Main {
   display: flex;
   justify-content: center;
+  position: absolute;
 
-  .pizza-info-wrapper {
-    width: 1255px;
-    margin-top: 38px;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #fffbeb;
+  // .pizza-info-wrapper {
+  //   width: 900px;
+  //   height: 600px;
+  //   display: flex;
+  //   justify-content: center;
+  //   background: #fff;
+  //   color: black;
+  //   margin-top: 38px;
+  //   border-radius: 10px;
+  // }
+}
+
+.pizzas-info-content {
+  margin-left: 37px;
+  margin-top: -32px;
+
+  .texts-left {
+    margin-top: 63px;
+
+    .taste-title {
+      margin-top: 29px;
+      font-family: Dodo, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol';
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    h3 {
+      color: black;
+
+      span {
+        color: grey !important;
+        font-weight: 400 !important;
+      }
+    }
   }
 }

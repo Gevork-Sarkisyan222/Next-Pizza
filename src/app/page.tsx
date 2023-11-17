@@ -13,7 +13,7 @@ import SpinPizzas from '././components/spin/SpinPizzas';
 import { CSSTransition } from 'react-transition-group';
 import { setCloseSpin } from './redux/slices/openSpin.slice';
 
-type pizza = {
+export type pizza = {
   id: number;
   image: string;
   title: string;
@@ -25,7 +25,7 @@ type pizza = {
   cheese: boolean;
 };
 
-const pizzas: pizza[] = [
+export const pizzas: pizza[] = [
   {
     id: 1,
     image:

@@ -7,6 +7,9 @@ import { addCart, removeCart } from '../redux/slices/cart.slice';
 import { setCheckedTrue, setCheckedFalse } from '../redux/slices/checked.slice';
 import { RootState } from '../redux/store';
 import Image from 'next/image';
+import PizzaInfo from './PizzaInfo';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import MobilePizzaInfo from './mobileInfo/MobilePizzaInfo';
 
 interface pizzaProps {
   id: number;
@@ -16,27 +19,14 @@ interface pizzaProps {
 }
 
 const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
-  // const [checked, setChecked] = useState(() => {
-  //   const savedChecked = localStorage.getItem(`checked_${id}`);
-  //   return savedChecked ? JSON.parse(savedChecked) : false;
-  // });
+  // open modal of information about pizzas
+  const [open, setOpen] = React.useState(false);
+
   const dispatch = useDispatch();
   const checked = useSelector((state: RootState) => state.checked[id]);
   const theme = useSelector((state: any) => state.changeTheme.theme);
 
-  // useEffect(() => {
-  //   const savedChecked = localStorage.getItem(`checked_${id}`);
-  //   if (savedChecked !== null) {
-  //     try {
-  //       const parsedChecked = JSON.parse(savedChecked);
-  //       dispatch(setChecked(parsedChecked));
-  //     } catch (error) {
-  //       console.error('Error parsing JSON:', error);
-  //     }
-  //   }
-  // }, [id, dispatch]);
-
-  const [openPizzaInfo, setOpenPizzaInfo] = useState();
+  const mobileQuery = useMediaQuery('(max-width:614px)');
 
   const [selectedButton, setSelectedButton] = useState(null);
   const [selectedStyleOfPizza, setSelectedStyleOfPizza] = useState(null);
@@ -80,11 +70,55 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
     console.log(checkedJson);
   }, [checked, id]);
 
+  const [openInfoPizza, setOpenInfoPizza] = useState(false);
+  const [openInfoMobile, setOpenInfoMobile] = useState(false);
+
+  const handleOpenPizzasInfo = () => {
+    setOpenInfoPizza(true);
+    setOpen(true);
+  };
+  const handleClosePizzasInfo = () => {
+    setOpenInfoPizza(false);
+  };
+
+  const handleOpenPizzasInfoForMobile = () => {
+    setOpenInfoMobile(true);
+  };
+
+  // its for moble component
+  const handleClosePizzasInfoForMobile = () => {
+    setOpenInfoMobile(false);
+  };
+
   return (
     <>
+      {openInfoPizza && (
+        <PizzaInfo
+          title={title}
+          image={image}
+          price={price}
+          open={open}
+          handleClosePizzasInfo={handleClosePizzasInfo}
+        />
+      )}
+      {openInfoMobile && (
+        <MobilePizzaInfo
+          openInfoMobile={openInfoMobile}
+          handleClosePizzasInfoForMobile={handleClosePizzasInfoForMobile}
+          title={title}
+          image={image}
+          price={price}
+        />
+      )}
       <div className="PizzaCard">
         <div className="pizza-img-title">
-          <Image width={260} height={260} src={image} alt="pizza" />
+          <Image
+            onClick={mobileQuery ? handleOpenPizzasInfoForMobile : handleOpenPizzasInfo}
+            width={260}
+            height={260}
+            src={image}
+            alt="pizza"
+          />
           <h1 className={`${theme ? 'title-for-dark' : ''}`}>{title}</h1>
         </div>
         <div className={`select-size ${theme ? 'select-dark-size' : ''}`}>
