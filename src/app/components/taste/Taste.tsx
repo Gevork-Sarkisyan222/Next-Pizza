@@ -17,7 +17,7 @@ export default function TitlebarImageList() {
   return (
     <ImageList sx={{ width: mobileQuery ? '100%' : 350, height: mobileQuery ? 192 : 230 }}>
       <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">
+        <ListSubheader sx={{ background: 'transparent' }} component="div">
           <ArrowDownIcon sx={{ color: 'rgb(255, 105, 0)' }} />
           <ArrowDownIcon sx={{ color: 'rgb(255, 105, 0)' }} />
           <ArrowDownIcon sx={{ color: 'rgb(255, 105, 0)' }} />
