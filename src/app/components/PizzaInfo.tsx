@@ -10,18 +10,7 @@ import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import Taste from './taste/Taste';
 import { useSelector } from 'react-redux';
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { keyframes } from '@emotion/react';
 
 interface PizzasProps {
   title: string;
@@ -45,6 +34,27 @@ const PizzaInfo: React.FC<PizzasProps> = ({ title, image, price, open, handleClo
     }
   };
 
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: theme ? '2px solid white' : 'none',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const changeColorAnimation = keyframes`
+  0% {
+    background: #a600ff;
+  }
+  100% {
+    background: #1f1f1f;
+  }
+`;
+
   return (
     <div className="Pizza-Info-Main">
       <Modal
@@ -66,10 +76,9 @@ const PizzaInfo: React.FC<PizzasProps> = ({ title, image, price, open, handleClo
               width: '900px',
               height: '510px',
               borderRadius: '30px',
-              border: 'none',
-              background: theme
-                ? 'linear-gradient(0deg, #2d0033 1%, #23002b 16%, #272727 94%)'
-                : '#ffff',
+              border: theme ? '2px solid white' : 'none',
+              background: theme ? 'linear-gradient(0deg, #a600ff 0%, #1f1f1f 99%)' : '#ffff',
+              animation: theme ? `${changeColorAnimation} 5s infinite alternate` : 'none',
             }}>
             <Box
               sx={{

@@ -1,0 +1,31 @@
+.NotFound {
+  display: flex;
+  justify-content: center;
+}
+
+.notFoundWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  width: 1200px;
+  height: 642px;
+  background: #f8de97;
+}
+
+.image {
+  width: 80% !important;
+}
+
+.text {
+  color: #d44f1f;
+  font-size: 30px;
+  font-weight: 400;
+  position: absolute;
+  top: 374px;
+
+  span {
+    color: #ef5b24;
+    font-weight: 600;
+  }
+}

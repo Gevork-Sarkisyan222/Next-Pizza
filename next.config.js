@@ -15,6 +15,7 @@ const nextConfig = {
       'react-pizza-v2.vercel.app',
       'cdn-icons-png.flaticon.com',
       'www.shakeyspizza.ph',
+      'as2.ftcdn.net',
     ],
   },
 };

@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from 'react-redux';
+import { keyframes } from '@emotion/react';
 
 import Image from 'next/image';
 import Taste from '../taste/Taste';
@@ -40,6 +41,15 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
     }
   };
 
+  const changeColorAnimation = keyframes`
+  0% {
+    background: #a600ff;
+  }
+  100% {
+    background: #3d194d;
+  }
+`;
+
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -50,6 +60,7 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
     // height: '88%',
     height: mobileQuery ? '747px' : '710px',
     background: theme ? 'linear-gradient(0deg, #2b008f 0%, #7a0064 38%, #292929 100%)' : '#ffff',
+    animation: theme ? `${changeColorAnimation} 4s infinite alternate` : 'none',
     border: theme ? '2px solid white' : '2px solid #000',
     boxShadow: 24,
     p: 4,
