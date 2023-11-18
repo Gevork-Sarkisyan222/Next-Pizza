@@ -89,7 +89,9 @@ const PizzaInfo: React.FC<PizzasProps> = ({ title, image, price, open, handleClo
               }}>
               <div className="pizzas-info-content">
                 <article className="texts-left">
-                  <h1 style={{ color: theme ? 'white' : 'black' }}>{title}</h1>
+                  <h1 style={{ color: theme ? 'white' : 'black' }}>
+                    {title.replace(/"/g, '&quot;')}
+                  </h1>
                   <h3 style={{ color: theme ? 'white' : 'black' }}>
                     цена: <span>{price} ₽</span>
                   </h3>

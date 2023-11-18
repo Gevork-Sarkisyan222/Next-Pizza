@@ -32,10 +32,6 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
   const theme = useSelector((state: any) => state.changeTheme.theme);
   const mobileQuery = useMediaQuery('(min-height:932px)');
 
-  const simpleConst = () => {
-    alert(2007);
-  };
-
   const handleBuyPizza = () => {
     const buyPizza = window.confirm('вы хотите купить этот товар?');
 
@@ -106,7 +102,7 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
             <h1
               style={{ fontSize: '26px', marginTop: '30px', color: theme ? 'white' : 'black' }}
               className="pizza-info-mobile-title">
-              {title}
+              {title.replace(/"/g, '&quot;')}
             </h1>
             <div className="pizzas-with-taste">
               <h3 style={{ color: theme ? 'white' : 'black' }}>Добавить по вкусу</h3>
