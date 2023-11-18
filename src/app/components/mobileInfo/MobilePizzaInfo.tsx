@@ -32,6 +32,10 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
   const theme = useSelector((state: any) => state.changeTheme.theme);
   const mobileQuery = useMediaQuery('(min-height:932px)');
 
+  const simpleConst = () => {
+    alert(2007);
+  };
+
   const handleBuyPizza = () => {
     const buyPizza = window.confirm('вы хотите купить этот товар?');
 
