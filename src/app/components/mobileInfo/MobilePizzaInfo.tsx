@@ -50,7 +50,7 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
     // height: '88%',
     height: mobileQuery ? '747px' : '710px',
     background: theme ? 'linear-gradient(0deg, #2b008f 0%, #7a0064 38%, #292929 100%)' : '#ffff',
-    border: '2px solid #000',
+    border: theme ? '2px solid white' : '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
