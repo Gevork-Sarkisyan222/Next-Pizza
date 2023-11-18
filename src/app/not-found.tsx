@@ -30,7 +30,7 @@ export default function NotFoundPage() {
               : '',
           }}
           className={styles.text}>
-          Страница которую вы искали <span>"не найдено"</span>
+          Страница которую вы искали <span>не найдено</span>
         </h1>
       </div>
     </div>

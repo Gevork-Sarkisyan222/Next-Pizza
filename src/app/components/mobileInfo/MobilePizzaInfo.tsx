@@ -102,7 +102,7 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
             <h1
               style={{ fontSize: '26px', marginTop: '30px', color: theme ? 'white' : 'black' }}
               className="pizza-info-mobile-title">
-              {title.replace(/"/g, '&quot;')}
+              {title}
             </h1>
             <div className="pizzas-with-taste">
               <h3 style={{ color: theme ? 'white' : 'black' }}>Добавить по вкусу</h3>
