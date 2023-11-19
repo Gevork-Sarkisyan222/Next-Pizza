@@ -24,6 +24,7 @@ export const changeThemeSlice = createSlice({
       state.theme = false;
       saveThemeToLocalStorage(false); // Сохраняем значение в localStorage
       console.log('light mode');
+      console.log('hello mode');
     },
     setChangeThemeDark(state) {
       state.theme = true;
