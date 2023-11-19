@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeCart } from '../redux/slices/cart.slice';
 import { setCheckedFalse } from '../redux/slices/checked.slice';
 import Image from 'next/image';
+import { RootStateTheme } from '../redux/slices/types/themeType';
 
 interface Iprops {
   id: number;
@@ -18,7 +19,7 @@ interface Iprops {
 const CartCard: React.FC<Iprops> = ({ id, title, image, price, onPriceChange }) => {
   const dispatch = useDispatch();
   const [pizzaCount, setPizzaCount] = useState(1);
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
 
   const setPizzaCountPlus = () => {
     setPizzaCount(pizzaCount + 1);

@@ -10,7 +10,7 @@ const initialState: IopenMenu = {
   openMenu: false,
 };
 
-const openMenuSlice = createSlice({
+export const openMenuSlice = createSlice({
   name: 'openMenu',
   initialState,
   reducers: {

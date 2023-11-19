@@ -12,11 +12,13 @@ import { clearCart } from '../redux/slices/cart.slice';
 import { clearAllChecked } from '../redux/slices/checked.slice';
 import Image from 'next/image';
 import { setChangeThemeLight } from '../redux/slices/changeTheme.slice';
+import { RootStateTheme } from '../redux/slices/types/themeType';
+import { RootStateMenu } from '../redux/slices/types/menuType';
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.cart);
-  const openMenu = useSelector((state: any) => state.openMenu.openMenu);
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const openMenu = useSelector((state: RootStateMenu) => state.openMenu.openMenu);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
   const dispatch = useDispatch();
   const deliverNumber = Math.floor(Math.random() * 100);
 

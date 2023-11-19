@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Taste from './taste/Taste';
 import { useSelector } from 'react-redux';
 import { keyframes } from '@emotion/react';
+import { RootStateTheme } from '../redux/slices/types/themeType';
 
 interface PizzasProps {
   title: string;
@@ -23,7 +24,7 @@ interface PizzasProps {
 const PizzaInfo: React.FC<PizzasProps> = ({ title, image, price, open, handleClosePizzasInfo }) => {
   const deliverNumber = Math.floor(Math.random() * 150);
   // change theme at pizzas info
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
 
   const handleBuyPizza = () => {
     const buyPizza = window.confirm('вы хотите купить этот товар?');

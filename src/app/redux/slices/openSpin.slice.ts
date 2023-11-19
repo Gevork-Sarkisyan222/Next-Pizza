@@ -17,7 +17,7 @@ const initialState: ISpin = {
   openSpin: initialOpenSpin,
 };
 
-const openSpinSlice = createSlice({
+export const openSpinSlice = createSlice({
   name: 'openSpin',
   initialState,
   reducers: {

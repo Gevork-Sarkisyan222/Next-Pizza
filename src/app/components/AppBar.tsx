@@ -15,6 +15,9 @@ import {
   setChangeThemeDark,
 } from '../redux/slices/changeTheme.slice';
 import Button from '@mui/material/Button';
+import { RootStateTheme } from '../redux/slices/types/themeType';
+import { RootStateMenu } from '../redux/slices/types/menuType';
+import { RootStateInput } from '../redux/slices/types/inputType';
 
 // theme icons
 import SunIcon from '@mui/icons-material/WbSunny';
@@ -44,14 +47,14 @@ const AppBar: React.FC<AppBarProps> = ({
   setOpenExpenisvePizzas,
 }) => {
   const value = useSelector((state: RootState) => state.value.value);
-  const inputState = useSelector((state: any) => state.inputState.inputState);
-  const openMenu = useSelector((state: any) => state.openMenu.openMenu);
+  const inputState = useSelector((state: RootStateInput) => state.inputState.inputState);
+  const openMenu = useSelector((state: RootStateMenu) => state.openMenu.openMenu);
   const [isScrollHidden, setIsScrollHidden] = useState(false);
 
   // themes change
   const [changeColors, setChangeColors] = useState(false);
   const [changeBackgroundImageTheme, setChangeBackgroundImageTheme] = useState(false);
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
   // ===================================================
 
   const handleOpenMobileMenu = () => {

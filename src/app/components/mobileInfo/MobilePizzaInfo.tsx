@@ -12,6 +12,7 @@ import { keyframes } from '@emotion/react';
 
 import Image from 'next/image';
 import Taste from '../taste/Taste';
+import { RootStateTheme } from '@/app/redux/slices/types/themeType';
 
 interface MobileInfoProps {
   openInfoMobile: boolean;
@@ -29,7 +30,7 @@ const MobilePizzaInfo: React.FC<MobileInfoProps> = ({
   price,
 }) => {
   const deliverNumber = Math.floor(Math.random() * 100);
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
   const mobileQuery = useMediaQuery('(min-height:932px)');
 
   const handleBuyPizza = () => {

@@ -1,16 +1,19 @@
-// checked.slice.ts
-
 import { createSlice } from '@reduxjs/toolkit';
 
 interface ITheme {
   theme: boolean;
 }
 
+const savedTheme = localStorage.getItem('theme');
 const initialState: ITheme = {
-  theme: false,
+  theme: savedTheme ? JSON.parse(savedTheme) : false,
 };
 
-const changeThemeSlice = createSlice({
+const saveThemeToLocalStorage = (theme: boolean) => {
+  localStorage.setItem('theme', JSON.stringify(theme));
+};
+
+export const changeThemeSlice = createSlice({
   name: 'changeTheme',
   initialState,
   reducers: {
@@ -19,9 +22,13 @@ const changeThemeSlice = createSlice({
     },
     setChangeThemeLight(state) {
       state.theme = false;
+      saveThemeToLocalStorage(false); // Сохраняем значение в localStorage
+      console.log('light mode');
     },
     setChangeThemeDark(state) {
       state.theme = true;
+      saveThemeToLocalStorage(true); // Сохраняем значение в localStorage
+      console.log('dark mode');
     },
   },
 });

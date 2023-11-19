@@ -12,6 +12,9 @@ import { setChangeTheme } from './redux/slices/changeTheme.slice';
 import SpinPizzas from '././components/spin/SpinPizzas';
 import { CSSTransition } from 'react-transition-group';
 import { setCloseSpin } from './redux/slices/openSpin.slice';
+import { RootStateTheme } from './redux/slices/types/themeType';
+import { RootStateMenu } from './redux/slices/types/menuType';
+import { RootStateSpin } from './redux/slices/types/spinType';
 
 export type pizza = {
   id: number;
@@ -703,8 +706,8 @@ export type Category = 'Все' | 'Мясные' | 'Вегетарианская
 
 export default function Home() {
   const value = useSelector((state: RootState) => state.value.value);
-  const openMenu = useSelector((state: any) => state.openMenu.openMenu);
-  const openSpin = useSelector((state: any) => state.openSpin.openSpin);
+  const openMenu = useSelector((state: RootStateMenu) => state.openMenu.openMenu);
+  const openSpin = useSelector((state: RootStateSpin) => state.openSpin.openSpin);
 
   const dispatch = useDispatch();
 
@@ -721,7 +724,7 @@ export default function Home() {
   const [openCheapPizzas, setOpenCheapPizzas] = useState(false);
   const [openExpenisvepPizzas, setOpenExpenisvePizzas] = useState(false);
 
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
 
   const handleOpenCheapPizzas = () => {
     // open pizzas

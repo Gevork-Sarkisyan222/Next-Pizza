@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addCart, removeCart } from '../redux/slices/cart.slice';
 import { setCheckedTrue, setCheckedFalse } from '../redux/slices/checked.slice';
 import { RootState } from '../redux/store';
+import { RootStateTheme } from '../redux/slices/types/themeType';
 import Image from 'next/image';
 import PizzaInfo from './PizzaInfo';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -18,24 +19,26 @@ interface pizzaProps {
   price: number;
 }
 
+type ButtonNameType = 'тонкое' | 'традиционное' | '26 см.' | '30 см.' | '40 см.';
+
 const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
   // open modal of information about pizzas
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
   const checked = useSelector((state: RootState) => state.checked[id]);
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
 
   const mobileQuery = useMediaQuery('(max-width:614px)');
 
-  const [selectedButton, setSelectedButton] = useState(null);
-  const [selectedStyleOfPizza, setSelectedStyleOfPizza] = useState(null);
+  const [selectedButton, setSelectedButton] = useState<ButtonNameType | null>(null);
+  const [selectedStyleOfPizza, setSelectedStyleOfPizza] = useState<ButtonNameType | null>(null);
 
-  const handleButtonClick = (buttonName: any) => {
+  const handleButtonClick = (buttonName: ButtonNameType) => {
     setSelectedButton(buttonName);
   };
 
-  const handleButtonClickOfStyle = (buttonName: any) => {
+  const handleButtonClickOfStyle = (buttonName: ButtonNameType) => {
     setSelectedStyleOfPizza(buttonName);
   };
 

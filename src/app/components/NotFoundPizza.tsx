@@ -3,9 +3,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
+import { RootStateTheme } from '../redux/slices/types/themeType';
 
 function NotFoundPizza() {
-  const theme = useSelector((state: any) => state.changeTheme.theme);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
 
   return (
     <div className="not-found-content" style={{ textAlign: 'center' }}>
