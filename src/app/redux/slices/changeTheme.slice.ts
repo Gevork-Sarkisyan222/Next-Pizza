@@ -23,13 +23,10 @@ export const changeThemeSlice = createSlice({
     setChangeThemeLight(state) {
       state.theme = false;
       saveThemeToLocalStorage(false); // Сохраняем значение в localStorage
-      console.log('light mode');
-      console.log('hello mode');
     },
     setChangeThemeDark(state) {
       state.theme = true;
       saveThemeToLocalStorage(true); // Сохраняем значение в localStorage
-      console.log('dark mode');
     },
   },
 });
