@@ -72,7 +72,7 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
   useEffect(() => {
     const checkedJson = JSON.stringify(checked);
     localStorage.setItem(`checked_${id}`, checkedJson);
-    console.log(checkedJson);
+    // console.log(checkedJson);
   }, [checked, id]);
 
   const [openInfoPizza, setOpenInfoPizza] = useState(false);

@@ -853,7 +853,7 @@ export default function Home() {
   React.useEffect(() => {
     const jsonSpin = JSON.stringify(openSpin);
     localStorage.setItem('spin', jsonSpin);
-    console.log(jsonSpin);
+    // console.log(jsonSpin);
   });
 
   const spinRef = React.useRef<HTMLDivElement>(null);

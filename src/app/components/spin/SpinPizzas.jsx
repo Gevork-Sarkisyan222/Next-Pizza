@@ -125,7 +125,7 @@ function SpinPizzas() {
         item.classList.add('active');
         const data = JSON.parse(item.getAttribute('data-item'));
 
-        console.log(data);
+        // console.log(data);
       },
       { once: true },
     );
