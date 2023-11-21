@@ -11,6 +11,8 @@ import Image from 'next/image';
 import PizzaInfo from './PizzaInfo';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MobilePizzaInfo from './mobileInfo/MobilePizzaInfo';
+import Button from '@mui/material/Button';
+import { VariantType, useSnackbar } from 'notistack';
 
 interface pizzaProps {
   id: number;
@@ -93,6 +95,30 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
     setOpenInfoMobile(false);
   };
 
+  // SNACKBAR
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClickVariantAdd = (variant: VariantType) => () => {
+    if (variant === 'success') {
+      enqueueSnackbar('Товар добавлен в корзину', {
+        variant,
+        style: { backgroundColor: '#ef5b24' },
+      });
+    } else {
+      enqueueSnackbar('Товар добавлен в корзину', { variant });
+    }
+  };
+  const handleClickVariantRemove = (variant: VariantType) => () => {
+    if (variant === 'error') {
+      enqueueSnackbar('Товар удален из корзины', {
+        variant,
+        style: { backgroundColor: '#992900' },
+      });
+    } else {
+      enqueueSnackbar('Товар удален из корзины', { variant });
+    }
+  };
+
   return (
     <>
       {openInfoPizza && (
@@ -157,7 +183,7 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
           <button>
             {checked ? (
               <section onClick={removeFromCart}>
-                <div className="button-content">
+                <div onClickCapture={handleClickVariantRemove('error')} className="button-content">
                   <Image
                     width={100}
                     height={100}
@@ -168,7 +194,7 @@ const PizzaCard: React.FC<pizzaProps> = ({ id, image, title, price }) => {
                 </div>
               </section>
             ) : (
-              <section onClick={handleAddToCart}>
+              <section onClickCapture={handleClickVariantAdd('success')} onClick={handleAddToCart}>
                 <div className="button-content">
                   <Image
                     width={100}

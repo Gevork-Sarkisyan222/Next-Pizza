@@ -4,13 +4,8 @@ interface ITheme {
   theme: boolean;
 }
 
-const savedTheme = localStorage.getItem('theme');
 const initialState: ITheme = {
-  theme: savedTheme ? JSON.parse(savedTheme) : false,
-};
-
-const saveThemeToLocalStorage = (theme: boolean) => {
-  localStorage.setItem('theme', JSON.stringify(theme));
+  theme: false,
 };
 
 export const changeThemeSlice = createSlice({
@@ -22,11 +17,9 @@ export const changeThemeSlice = createSlice({
     },
     setChangeThemeLight(state) {
       state.theme = false;
-      saveThemeToLocalStorage(false); // Сохраняем значение в localStorage
     },
     setChangeThemeDark(state) {
       state.theme = true;
-      saveThemeToLocalStorage(true); // Сохраняем значение в localStorage
     },
   },
 });
