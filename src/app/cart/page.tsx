@@ -15,6 +15,12 @@ import { setChangeThemeLight } from '../redux/slices/changeTheme.slice';
 import { RootStateTheme } from '../redux/slices/types/themeType';
 import { RootStateMenu } from '../redux/slices/types/menuType';
 
+// snackbar imports
+import Snackbar from '@mui/joy/Snackbar';
+import Stack from '@mui/joy/Stack';
+import ButtonJoy from '@mui/joy/Button';
+import TypographyJoy from '@mui/joy/Typography';
+
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.cart);
   const openMenu = useSelector((state: RootStateMenu) => state.openMenu.openMenu);
@@ -31,14 +37,6 @@ const Cart = () => {
     }
   };
 
-  const handleBuyPizzas = () => {
-    alert('ПОЗДРАВЛЯЕМ! ВЫ ПРИОБРЕЛИ НАШИ ПИЦЦЫ');
-    alert(`МЫ ПЕРЕДАЛИ ВАШ ЗАКАЗ ПОД НОМЕРОМ ${deliverNumber} КУРЬЕРСКОЙ СЛУЖБЕ`);
-
-    dispatch(clearCart());
-    dispatch(clearAllChecked());
-  };
-
   const handleChangeThemeToLightInCart = () => {
     const bodyFind = document.querySelector('body');
     if (bodyFind) {
@@ -52,6 +50,26 @@ const Cart = () => {
 
   const handleCartCardPriceChange = (newPrice: number) => {
     setTotalPrice((prevTotalPrice) => prevTotalPrice + newPrice);
+  };
+
+  // snackbars
+  const [openSnackBar, setOpenSnackBar] = React.useState<boolean>(false);
+  const [successfullBuy, setSuccessfullBuy] = useState(false);
+  const [content, setContent] = useState(true);
+
+  const handleBuyPizzasOpenFirstStep = () => {
+    setOpenSnackBar(true);
+  };
+
+  const agreeToOpenBuy = () => {
+    setContent(false);
+    setSuccessfullBuy(true);
+
+    // buy pizzas clear cart and checked
+    setTimeout(() => {
+      dispatch(clearCart());
+      dispatch(clearAllChecked());
+    }, 2000);
   };
 
   const renderCart = (
@@ -92,6 +110,53 @@ const Cart = () => {
 
     return (
       <>
+        <Snackbar
+          autoHideDuration={500000}
+          variant="solid"
+          color="primary"
+          size="lg"
+          invertedColors
+          open={openSnackBar}
+          onClose={() => setOpenSnackBar(false)}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          sx={(theme) => ({
+            background: '#ef5b24',
+            maxWidth: 360,
+          })}>
+          <div>
+            <TypographyJoy level="title-lg">Next Pizza:</TypographyJoy>
+            {content && (
+              <TypographyJoy sx={{ mt: 1, mb: 2, color: 'white' }}>
+                Вы действительно хотите купить нашы пиццы?
+              </TypographyJoy>
+            )}
+
+            {successfullBuy && (
+              <TypographyJoy sx={{ mt: 1, mb: 2, color: 'white' }}>
+                ПОЗДРАВЛЯЕМ! Вы приобрели наши пиццы мы передали ваш заказ под номером{' '}
+                <span style={{ fontWeight: 900, color: 'white' }}>{deliverNumber}</span> курьерской
+                службе
+              </TypographyJoy>
+            )}
+
+            <Stack direction="row" spacing={1}>
+              {content && (
+                <ButtonJoy onClick={agreeToOpenBuy} variant="solid" sx={{ color: 'black' }}>
+                  Да
+                </ButtonJoy>
+              )}
+              {content && (
+                <ButtonJoy
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => setOpenSnackBar(false)}>
+                  Нет
+                </ButtonJoy>
+              )}
+            </Stack>
+          </div>
+        </Snackbar>
+
         {openMenu && <div className="black-bg"></div>}
         <div className="cart-container">
           <div className="mobile-cart-content">
@@ -128,7 +193,7 @@ const Cart = () => {
           <Link href={'/'}>
             <button className="go-back-button">Вернуться назад</button>
           </Link>
-          <button onClick={handleBuyPizzas} className="pay-now-button">
+          <button onClick={handleBuyPizzasOpenFirstStep} className="pay-now-button">
             Оплатить сейчас
           </button>
         </div>

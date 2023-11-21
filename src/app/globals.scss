@@ -390,6 +390,11 @@ body::-webkit-scrollbar-thumb {
         padding: 23px;
         letter-spacing: 0.24px;
         cursor: pointer;
+
+        &:hover {
+          background-color: #d3d3d3;
+          transition: 300ms;
+        }
       }
     }
     .sort {
