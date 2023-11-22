@@ -3,6 +3,7 @@ import '../enter.scss';
 import Register from '../registration/Register';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Image from 'next/image';
 
 interface Props {
   handleClose: () => void;
@@ -20,6 +21,13 @@ const Login: React.FC<Props> = ({ handleClose }) => {
   const handleBackToLogin = () => {
     setOpenRegister(false);
     setContent(true);
+  };
+
+  const redirectToGoogle = () => {
+    window.open('https://myaccount.google.com/', '_blank');
+  };
+  const redirectToApple = () => {
+    window.open('https://support.apple.com/en-us/HT204053', '_blank');
   };
 
   const mobileQuery401LittleDevice = useMediaQuery('(max-width:401px)');
@@ -75,8 +83,24 @@ const Login: React.FC<Props> = ({ handleClose }) => {
             <p className="p line">с помошью</p>
 
             <div className="flex-row">
-              <button className="btn google">Google</button>
-              <button className="btn apple">Apple</button>
+              <button onClick={redirectToGoogle} className="btn google">
+                <Image
+                  width={30}
+                  height={30}
+                  src="https://img.icons8.com/?size=48&id=17949&format=png"
+                  alt="google"
+                />{' '}
+                Google
+              </button>
+              <button onClick={redirectToApple} className="btn apple">
+                <Image
+                  width={30}
+                  height={30}
+                  src="https://img.icons8.com/?size=50&id=30840&format=png"
+                  alt="apple"
+                />{' '}
+                Apple
+              </button>
             </div>
           </>
         )}

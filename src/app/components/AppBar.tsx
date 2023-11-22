@@ -165,6 +165,13 @@ const AppBar: React.FC<AppBarProps> = ({
     dispatch(setChangeThemeDark());
   };
 
+  const redirectToGoogle = () => {
+    window.open('https://myaccount.google.com/', '_blank');
+  };
+  const redirectToApple = () => {
+    window.open('https://support.apple.com/en-us/HT204053', '_blank');
+  };
+
   const menuRef = React.useRef<HTMLDivElement>(null);
 
   const handleOpenSpin = () => {
@@ -217,8 +224,10 @@ const AppBar: React.FC<AppBarProps> = ({
 
           {/* menu  */}
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
-            <MenuItem>Профиль</MenuItem>
-            <MenuItem onClick={handleOpen}>Выйти с аккаунта</MenuItem>
+            <MenuItem onClickCapture={handleCloseMenu}>Профиль</MenuItem>
+            <MenuItem onClick={handleOpen} onClickCapture={handleCloseMenu}>
+              Выйти с аккаунта
+            </MenuItem>
           </Menu>
 
           <h1 className={`${theme ? 'dark-mode-h1' : ''}`}>NEXT PIZZA</h1>

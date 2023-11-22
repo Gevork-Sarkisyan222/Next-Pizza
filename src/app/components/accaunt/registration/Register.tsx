@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../enter.scss';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@mui/material';
@@ -10,14 +10,43 @@ interface PropsRegister {
 }
 
 const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
+  const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU',
+  );
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageUrl = event.target?.result;
+        if (imageUrl) {
+          setSelectedImage(imageUrl);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <BackIcon onClick={handleBackToLogin} sx={{ position: 'absolute', cursor: 'pointer' }} />
       <div className="Avatar-register">
-        <Avatar
-          sx={{ cursor: 'pointer', width: '140px', height: '140px' }}
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU"
-        />
+        <label htmlFor="imageUpload" style={{ position: 'relative' }}>
+          <input
+            id="imageUpload"
+            type="file"
+            accept="image/*"
+            style={{
+              display: 'none',
+            }}
+            onChange={handleImageChange}
+          />
+          <Avatar
+            sx={{ cursor: 'pointer', width: '140px', height: '140px' }}
+            src={selectedImage as string}
+          />
+        </label>
       </div>
       <div style={{ display: 'flex', gap: '30px' }}>
         <div className="inputForm">
@@ -31,7 +60,8 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path d="M6.176 1.322l2.844-1.322 4.041 7.89-2.724 1.341c-.538 1.259 2.159 6.289 3.297 6.372.09-.058 2.671-1.328 2.671-1.328l4.11 7.932s-2.764 1.354-2.854 1.396c-7.862 3.591-19.103-18.258-11.385-22.281zm1.929 1.274l-1.023.504c-5.294 2.762 4.177 21.185 9.648 18.686l.971-.474-2.271-4.383-1.026.5c-3.163 1.547-8.262-8.219-5.055-9.938l1.007-.497-2.251-4.398z" />
         </svg>
-        <input type="number" className="input" placeholder="Номер телефона" />
+        <h3 style={{ marginTop: '13px', marginRight: '-3px' }}>+</h3>
+        <input defaultValue="995" type="number" className="input" placeholder="Номер телефона" />
       </div>
       <div className="inputForm">
         <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
