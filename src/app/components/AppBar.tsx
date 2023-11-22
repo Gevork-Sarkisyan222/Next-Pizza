@@ -18,12 +18,21 @@ import Button from '@mui/material/Button';
 import { RootStateTheme } from '../redux/slices/types/themeType';
 import { RootStateMenu } from '../redux/slices/types/menuType';
 import { RootStateInput } from '../redux/slices/types/inputType';
+import Avatar from '@mui/material/Avatar';
 
 // theme icons
 import SunIcon from '@mui/icons-material/WbSunny';
 import MoonIcon from '@mui/icons-material/DarkMode';
 import { CSSTransition } from 'react-transition-group';
 import { setOpenSpin } from '../redux/slices/openSpin.slice';
+import Login from './accaunt/login/Login';
+
+// menu item
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
+// login modal
+import Modal from '@mui/material/Modal';
 
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
@@ -162,16 +171,52 @@ const AppBar: React.FC<AppBarProps> = ({
     dispatch(setOpenSpin());
   };
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  // login states
+  const [openLoginModal, setOpenLoginModal] = React.useState<boolean>(false);
+  const handleOpen = () => setOpenLoginModal(true);
+  const handleClose = () => setOpenLoginModal(false);
+
   return (
     <>
+      <Modal
+        open={openLoginModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Login handleClose={handleClose} />
+      </Modal>
       <div className="AppBar">
         <section className="app-bar-content">
-          <Image
-            width={100}
-            height={100}
-            src="https://react-pizza-v2.vercel.app/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg"
-            alt="app image"
+          <Avatar
+            onClick={handleAvatarClick}
+            sx={{
+              position: 'absolute',
+              marginLeft: '-58px',
+              top: '24px',
+              width: '47px',
+              height: '47px',
+              cursor: 'pointer',
+            }}
+            alt="Remy Sharp"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU"
           />
+
+          {/* menu  */}
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
+            <MenuItem>Профиль</MenuItem>
+            <MenuItem onClick={handleOpen}>Выйти с аккаунта</MenuItem>
+          </Menu>
+
           <h1 className={`${theme ? 'dark-mode-h1' : ''}`}>NEXT PIZZA</h1>
           <p>самая вкусная пицца во вселенной</p>
         </section>

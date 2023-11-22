@@ -629,7 +629,8 @@ body::-webkit-scrollbar-thumb {
 
   .app-bar-content {
     margin-left: 122px;
-    margin-top: 19px;
+    margin-top: 32px;
+    position: relative;
 
     h1 {
       color: #181818;
@@ -702,19 +703,19 @@ body::-webkit-scrollbar-thumb {
       }
     }
 
-    img {
-      width: 38px;
-      margin-left: -50px;
-      margin-bottom: -65px;
-      height: 38px;
+    // img {
+    //   width: 38px;
+    //   margin-left: -50px;
+    //   margin-bottom: -65px;
+    //   height: 38px;
 
-      @media (max-width: 400px) {
-        width: 38px;
-        margin-left: -74px;
-        margin-bottom: -62px;
-        height: 38px;
-      }
-    }
+    //   @media (max-width: 400px) {
+    //     width: 38px;
+    //     margin-left: -74px;
+    //     margin-bottom: -62px;
+    //     height: 38px;
+    //   }
+    // }
   }
 
   .menu {
