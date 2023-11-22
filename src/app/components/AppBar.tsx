@@ -33,6 +33,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 // login modal
 import Modal from '@mui/material/Modal';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
@@ -186,6 +187,9 @@ const AppBar: React.FC<AppBarProps> = ({
   const handleOpen = () => setOpenLoginModal(true);
   const handleClose = () => setOpenLoginModal(false);
 
+  const mobileQuery = useMediaQuery('(max-width:490px)');
+  const mobileQuery401LittleDevice = useMediaQuery('(max-width:401px)');
+
   return (
     <>
       <Modal
@@ -201,8 +205,8 @@ const AppBar: React.FC<AppBarProps> = ({
             onClick={handleAvatarClick}
             sx={{
               position: 'absolute',
-              marginLeft: '-58px',
-              top: '24px',
+              marginLeft: mobileQuery401LittleDevice ? '-75px' : '-58px',
+              top: mobileQuery ? '13px' : '24px',
               width: '47px',
               height: '47px',
               cursor: 'pointer',
