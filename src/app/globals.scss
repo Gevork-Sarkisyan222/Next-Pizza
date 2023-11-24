@@ -889,6 +889,10 @@ body::-webkit-scrollbar-thumb {
       cursor: pointer;
     }
 
+    @media (max-width: 490px) {
+      margin-top: 48px;
+    }
+
     @media (max-width: 400px) {
       position: relative;
       right: 28px;

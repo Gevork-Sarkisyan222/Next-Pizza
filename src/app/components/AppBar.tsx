@@ -35,6 +35,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+// snackbar
+import Snackbar from '@mui/joy/Snackbar';
+import Stack from '@mui/joy/Stack';
+import ButtonJoy from '@mui/joy/Button';
+import TypographyJoy from '@mui/joy/Typography';
+
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
   setOpenVeganPizza?: (value: boolean) => void;
@@ -165,13 +171,6 @@ const AppBar: React.FC<AppBarProps> = ({
     dispatch(setChangeThemeDark());
   };
 
-  const redirectToGoogle = () => {
-    window.open('https://myaccount.google.com/', '_blank');
-  };
-  const redirectToApple = () => {
-    window.open('https://support.apple.com/en-us/HT204053', '_blank');
-  };
-
   const menuRef = React.useRef<HTMLDivElement>(null);
 
   const handleOpenSpin = () => {
@@ -191,7 +190,17 @@ const AppBar: React.FC<AppBarProps> = ({
 
   // login states
   const [openLoginModal, setOpenLoginModal] = React.useState<boolean>(false);
-  const handleOpen = () => setOpenLoginModal(true);
+  const [quitAccauntSnackBar, setQuitAccauntSnackBar] = useState(false);
+
+  const handleOpenSnackBar = () => {
+    setQuitAccauntSnackBar(true);
+  };
+
+  const handleOpenLoginModal = () => {
+    setOpenLoginModal(true);
+    setQuitAccauntSnackBar(false);
+  };
+
   const handleClose = () => setOpenLoginModal(false);
 
   const mobileQuery = useMediaQuery('(max-width:490px)');
@@ -199,6 +208,38 @@ const AppBar: React.FC<AppBarProps> = ({
 
   return (
     <>
+      <Snackbar
+        autoHideDuration={500000}
+        variant="solid"
+        color="primary"
+        size="lg"
+        invertedColors
+        open={quitAccauntSnackBar}
+        onClose={() => setQuitAccauntSnackBar(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        sx={(theme) => ({
+          background: '#ef5b24',
+          maxWidth: 360,
+        })}>
+        <div>
+          <TypographyJoy level="title-lg">Next Pizza:</TypographyJoy>
+          <TypographyJoy sx={{ mt: 1, mb: 2, color: 'white' }}>
+            Вы действительно хотите выйти с аккаунта?
+          </TypographyJoy>
+          <Stack direction="row" spacing={1}>
+            <ButtonJoy onClick={handleOpenLoginModal} variant="solid" sx={{ color: 'black' }}>
+              Да
+            </ButtonJoy>
+            <ButtonJoy
+              sx={{ color: 'white' }}
+              variant="outlined"
+              color="primary"
+              onClick={() => setQuitAccauntSnackBar(false)}>
+              Нет
+            </ButtonJoy>
+          </Stack>
+        </div>
+      </Snackbar>
       <Modal
         open={openLoginModal}
         aria-labelledby="modal-modal-title"
@@ -212,10 +253,10 @@ const AppBar: React.FC<AppBarProps> = ({
             onClick={handleAvatarClick}
             sx={{
               position: 'absolute',
-              marginLeft: mobileQuery401LittleDevice ? '-75px' : '-58px',
+              marginLeft: mobileQuery401LittleDevice ? '-81px' : '-67px',
               top: mobileQuery ? '13px' : '24px',
-              width: '47px',
-              height: '47px',
+              width: '53px',
+              height: '53px',
               cursor: 'pointer',
             }}
             alt="Remy Sharp"
@@ -225,7 +266,7 @@ const AppBar: React.FC<AppBarProps> = ({
           {/* menu  */}
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
             <MenuItem onClickCapture={handleCloseMenu}>Профиль</MenuItem>
-            <MenuItem onClick={handleOpen} onClickCapture={handleCloseMenu}>
+            <MenuItem onClick={handleOpenSnackBar} onClickCapture={handleCloseMenu}>
               Выйти с аккаунта
             </MenuItem>
           </Menu>
