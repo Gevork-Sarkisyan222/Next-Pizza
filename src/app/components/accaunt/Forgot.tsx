@@ -36,7 +36,7 @@ const Forgot: React.FC<Iprops> = ({ handleCloseForgot }) => {
 
   const onClickCodeButton = () => {
     if (codeValue.length !== 4) {
-      alert('Кода нету может еще отправить');
+      alert('Кода нету может еще отправить?');
     } else {
       setSuccessfullEnter(true);
       setOpen(true);

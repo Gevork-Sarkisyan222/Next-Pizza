@@ -33,6 +33,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 // login modal
 import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // snackbar
@@ -40,6 +41,8 @@ import Snackbar from '@mui/joy/Snackbar';
 import Stack from '@mui/joy/Stack';
 import ButtonJoy from '@mui/joy/Button';
 import TypographyJoy from '@mui/joy/Typography';
+// profile
+import Profile from '../components/accaunt/profile/Profile';
 
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
@@ -205,9 +208,40 @@ const AppBar: React.FC<AppBarProps> = ({
 
   const mobileQuery = useMediaQuery('(max-width:490px)');
   const mobileQuery401LittleDevice = useMediaQuery('(max-width:401px)');
+  const [openProfile, setOpenProfile] = useState(false);
+  const handleOpenProfile = () => setOpenProfile(true);
+  const handleCloseProfile = () => setOpenProfile(false);
+
+  // for phones
+  const mobileQuery694 = useMediaQuery('(max-width:694px)');
+
+  const profileStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: mobileQuery694 ? 325 : 600,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: '20px',
+  };
 
   return (
     <>
+      {/* open profile */}
+      <Modal
+        open={openProfile}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box sx={profileStyle}>
+          <Profile handleCloseProfile={handleCloseProfile} />
+        </Box>
+      </Modal>
+      {/* ================= */}
       <Snackbar
         autoHideDuration={500000}
         variant="solid"
@@ -265,7 +299,9 @@ const AppBar: React.FC<AppBarProps> = ({
 
           {/* menu  */}
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
-            <MenuItem onClickCapture={handleCloseMenu}>Профиль</MenuItem>
+            <MenuItem onClickCapture={handleCloseMenu} onClick={handleOpenProfile}>
+              Профиль
+            </MenuItem>
             <MenuItem onClick={handleOpenSnackBar} onClickCapture={handleCloseMenu}>
               Выйти с аккаунта
             </MenuItem>
