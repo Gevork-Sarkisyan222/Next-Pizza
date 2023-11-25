@@ -4,6 +4,8 @@ import Avatar from '@mui/material/Avatar';
 import PenIcon from '@mui/icons-material/BorderColor';
 import SaveIcon from '@mui/icons-material/SaveAs';
 import LeftArrowIcon from '@mui/icons-material/KeyboardReturn';
+import { useSelector } from 'react-redux';
+import { RootStateTheme } from '@/app/redux/slices/types/themeType';
 
 interface IProps {
   handleCloseProfile: () => void;
@@ -12,6 +14,7 @@ interface IProps {
 const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
   const [edit, setEdit] = useState(true);
   const [editPenContent, setEditPenContent] = useState(false);
+  const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
 
   const handleEdit = () => {
     setEdit(!edit);
@@ -28,7 +31,9 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
     <div className="Profile">
       <div className="profile-content">
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <h1 className="profile-title">Ваш профиль</h1>
+          <h1 style={{ color: theme ? 'white' : 'black' }} className="profile-title">
+            Ваш профиль
+          </h1>
         </div>
         <article style={{ display: 'flex', justifyContent: 'center' }}>
           <Avatar
@@ -47,13 +52,13 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
               <PenIcon />
             </button>
           )}
-          <h3>Геворк</h3>
+          <h3 style={{ color: theme ? 'white' : 'black' }}>Геворк</h3>
           {editPenContent && (
             <button className="button-pen">
               <PenIcon />
             </button>
           )}
-          <h3>Саркисян</h3>
+          <h3 style={{ color: theme ? 'white' : 'black' }}>Саркисян</h3>
         </div>
         <div className="email-section">
           {editPenContent && (
@@ -62,7 +67,7 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
             </button>
           )}
 
-          <h3>zadroterkom@gmail.com</h3>
+          <h3 style={{ color: theme ? 'white' : 'black' }}>zadroterkom@gmail.com</h3>
         </div>
         <div style={{ display: 'flex', gap: '20px' }}>
           <button className="button-orange" onClick={handleCloseProfile}>

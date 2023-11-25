@@ -214,15 +214,16 @@ const AppBar: React.FC<AppBarProps> = ({
 
   // for phones
   const mobileQuery694 = useMediaQuery('(max-width:694px)');
+  const mobileQuery410px = useMediaQuery('(max-width:410px)');
 
   const profileStyle = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: mobileQuery694 ? 325 : 600,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    width: mobileQuery410px ? 290 : mobileQuery694 ? 325 : 600,
+    bgcolor: theme ? '#272727' : 'white',
+    border: '2px solid white',
     boxShadow: 24,
     p: 4,
     display: 'flex',
