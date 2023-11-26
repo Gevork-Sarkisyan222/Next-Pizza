@@ -9,6 +9,7 @@ import inputState from './slices/InputState.slice';
 import openMenu from './slices/openMenu.slice';
 import changeTheme from './slices/changeTheme.slice';
 import openSpin from './slices/openSpin.slice';
+import formData from './slices/formData.slice';
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     openMenu,
     changeTheme,
     openSpin,
+    formData,
   },
 });
 

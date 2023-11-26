@@ -43,6 +43,7 @@ import ButtonJoy from '@mui/joy/Button';
 import TypographyJoy from '@mui/joy/Typography';
 // profile
 import Profile from '../components/accaunt/profile/Profile';
+import { clearFormData } from '../redux/slices/formData.slice';
 
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
@@ -197,6 +198,7 @@ const AppBar: React.FC<AppBarProps> = ({
 
   const handleOpenSnackBar = () => {
     setQuitAccauntSnackBar(true);
+    dispatch(clearFormData());
   };
 
   const handleOpenLoginModal = () => {

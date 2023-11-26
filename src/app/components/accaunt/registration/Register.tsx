@@ -3,13 +3,14 @@ import '../enter.scss';
 import Avatar from '@mui/material/Avatar';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import { RootStateTheme } from '@/app/redux/slices/types/themeType';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Snackbar from '@mui/joy/Snackbar';
 import Stack from '@mui/joy/Stack';
 import ButtonJoy from '@mui/joy/Button';
 import TypographyJoy from '@mui/joy/Typography';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { setFormData } from '@/app/redux/slices/formData.slice';
 
 interface PropsRegister {
   handleBackToLogin: () => void;
@@ -31,17 +32,20 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU',
   );
   const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
+  const dispatch = useDispatch();
 
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const [formData, setFormData] = useState<IFormData>({
-    name: '',
-    surname: '',
-    phone: '',
-    country: '',
-    email: '',
-    password: '',
-    repeat_password: '',
-  });
+  // const [formData, setFormData] = useState<IFormData>({
+  //   name: '',
+  //   surname: '',
+  //   phone: '',
+  //   country: '',
+  //   email: '',
+  //   password: '',
+  //   repeat_password: '',
+  // });
+  const formData = useSelector((state: any) => state.formData.formData);
+
   const [openCreationMessageAndCircular, setOpenCreationMessageAndCircular] = useState(false);
 
   const handleCreateAccaunt = () => {
@@ -136,6 +140,10 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
     }
   };
 
+  const handleInputChange = (fieldName: string, value: string) => {
+    dispatch(setFormData({ ...formData, [fieldName]: value }));
+  };
+
   return (
     <>
       <div>
@@ -197,7 +205,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
                 backgroundColor: theme ? '#272727' : '#fff',
                 color: theme ? 'white' : 'black',
               }}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => handleInputChange('name', e.target.value)}
               name="name"
               id="name"
               type="text"
@@ -213,7 +221,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
                 backgroundColor: theme ? '#272727' : '#fff',
                 color: theme ? 'white' : 'black',
               }}
-              onChange={(e) => setFormData({ ...formData, surname: e.target.value })}
+              onChange={(e) => handleInputChange('surname', e.target.value)}
               name="surname"
               id="surname"
               type="text"
@@ -241,7 +249,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
                 backgroundColor: theme ? '#272727' : '#fff',
                 color: theme ? 'white' : 'black',
               }}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              onChange={(e) => handleInputChange('phone', e.target.value)}
               name="phone"
               id="phone"
               defaultValue="995"
@@ -264,7 +272,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
                 backgroundColor: theme ? '#272727' : '#fff',
                 color: theme ? 'white' : 'black',
               }}
-              onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+              onChange={(e) => handleInputChange('country', e.target.value)}
               name="country"
               id="country"
               type="text"
@@ -293,7 +301,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
             type="email"
             className="input"
             placeholder="Электронная почта"
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) => handleInputChange('email', e.target.value)}
           />
         </div>
         <div className="inputForm">
@@ -318,7 +326,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
             className="input"
             placeholder="Придумайте пароль"
             onChange={(e) => {
-              setFormData({ ...formData, password: e.target.value });
+              handleInputChange('password', e.target.value);
               if (e.target.value === formData.repeat_password) {
                 setPasswordsMatch(true);
               } else {
@@ -349,7 +357,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
             id="repeat_password"
             name="repeat_password"
             onChange={(e) => {
-              setFormData({ ...formData, repeat_password: e.target.value });
+              handleInputChange('repeat_password', e.target.value);
               if (e.target.value === formData.password) {
                 setPasswordsMatch(true);
               } else {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './enter.scss';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFormData } from '@/app/redux/slices/formData.slice';
 import { RootStateTheme } from '@/app/redux/slices/types/themeType';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -21,7 +22,10 @@ const Forgot: React.FC<Iprops> = ({ handleCloseForgot }) => {
   const [emailWriteContent, setEmailWriteContent] = useState<boolean>(true);
   const [forgotCode, setForgotCode] = useState<boolean>(false);
   const [codeComeForButton, setCodeComeForButton] = useState(false);
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
+  // const email = useSelector((state: any) => state.formData.formData.email);
+  const formData = useSelector((state: any) => state.formData.formData);
   const [code, setCode] = useState(false);
   const randomConfirmationCode = Math.floor(1000 + Math.random() * 9000);
 
@@ -52,7 +56,7 @@ const Forgot: React.FC<Iprops> = ({ handleCloseForgot }) => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (email.match(emailRegex)) {
+    if (formData.email.match(emailRegex)) {
       setForgotCode(true);
       setEmailWriteContent(false);
 
@@ -66,8 +70,18 @@ const Forgot: React.FC<Iprops> = ({ handleCloseForgot }) => {
     }
   };
 
+  // const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(e.target.value);
+  // };
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    const { name, value } = e.target;
+    dispatch(
+      setFormData({
+        ...formData,
+        [name]: value,
+      }),
+    );
   };
 
   const handleCloseForgotBack = () => {

@@ -18,6 +18,19 @@ const nextConfig = {
       'as2.ftcdn.net',
     ],
   },
+  webpack(config, { isServer }) {
+    if (isServer) {
+      // config.node = {
+      //   fs: 'empty',
+      //   global: true,
+      //   crypto: 'empty',
+      //   process: true,
+      //   Buffer: true,
+      //   zlib: 'empty',
+      // };
+    }
+    return config;
+  },
 };
 
 module.exports = nextConfig;

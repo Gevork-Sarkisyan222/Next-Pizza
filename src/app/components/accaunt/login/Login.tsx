@@ -4,7 +4,7 @@ import Register from '../registration/Register';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootStateTheme } from '../../../redux/slices/types/themeType';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,6 +14,7 @@ import Stack from '@mui/joy/Stack';
 import ButtonJoy from '@mui/joy/Button';
 import TypographyJoy from '@mui/joy/Typography';
 import Forgot from '../Forgot';
+import { setFormData } from '@/app/redux/slices/formData.slice';
 
 interface Props {
   handleClose: () => void;
@@ -23,10 +24,11 @@ const Login: React.FC<Props> = ({ handleClose }) => {
   const [content, setContent] = useState(true);
   const [openRegister, setOpenRegister] = useState(false);
   const [openForgot, setOpenForgot] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   email: '',
+  //   password: '',
+  // });
+  const formData = useSelector((state: any) => state.formData.formData);
 
   // open loading
   const [open, setOpen] = React.useState(false);
@@ -37,6 +39,7 @@ const Login: React.FC<Props> = ({ handleClose }) => {
   // ================
 
   const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
+  const dispatch = useDispatch();
 
   // opening
   const handleOpenRegister = () => {
@@ -87,10 +90,12 @@ const Login: React.FC<Props> = ({ handleClose }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    dispatch(
+      setFormData({
+        ...formData,
+        [name]: value,
+      }),
+    );
   };
 
   const [successfullEnter, setSuccessfullEnter] = useState(false);

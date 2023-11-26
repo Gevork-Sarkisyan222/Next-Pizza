@@ -15,6 +15,9 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
   const [edit, setEdit] = useState(true);
   const [editPenContent, setEditPenContent] = useState(false);
   const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
+  const name = useSelector((state: any) => state.formData.formData.name);
+  const surname = useSelector((state: any) => state.formData.formData.surname);
+  const email = useSelector((state: any) => state.formData.formData.email);
 
   const handleEdit = () => {
     setEdit(!edit);
@@ -52,13 +55,13 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
               <PenIcon />
             </button>
           )}
-          <h3 style={{ color: theme ? 'white' : 'black' }}>Геворк</h3>
+          <h3 style={{ color: theme ? 'white' : 'black' }}>{name === '' ? 'User' : name}</h3>
           {editPenContent && (
             <button className="button-pen">
               <PenIcon />
             </button>
           )}
-          <h3 style={{ color: theme ? 'white' : 'black' }}>Саркисян</h3>
+          <h3 style={{ color: theme ? 'white' : 'black' }}>{surname === '' ? '2023' : surname}</h3>
         </div>
         <div className="email-section">
           {editPenContent && (
@@ -67,7 +70,9 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
             </button>
           )}
 
-          <h3 style={{ color: theme ? 'white' : 'black' }}>zadroterkom@gmail.com</h3>
+          <h3 style={{ color: theme ? 'white' : 'black' }}>
+            {email === '' ? 'почта не указано' : email}
+          </h3>
         </div>
         <div style={{ display: 'flex', gap: '20px' }}>
           <button className="button-orange" onClick={handleCloseProfile}>
