@@ -11,6 +11,7 @@ import TypographyJoy from '@mui/joy/Typography';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { setFormData } from '@/app/redux/slices/formData.slice';
+import { setSelectedAvatar } from '@/app/redux/slices/selectedAvatar.slice';
 
 interface PropsRegister {
   handleBackToLogin: () => void;
@@ -28,9 +29,10 @@ interface IFormData {
 }
 
 const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
-  const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU',
-  );
+  // const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(
+  //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU',
+  // );
+  const selectedAvatar = useSelector((state: any) => state.selectedAvatar.selectedAvatar);
   const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
   const dispatch = useDispatch();
 
@@ -133,7 +135,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
       reader.onload = (event) => {
         const imageUrl = event.target?.result;
         if (imageUrl) {
-          setSelectedImage(imageUrl);
+          dispatch(setSelectedAvatar(imageUrl as string));
         }
       };
       reader.readAsDataURL(file);
@@ -192,7 +194,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
             />
             <Avatar
               sx={{ cursor: 'pointer', width: '140px', height: '140px' }}
-              src={selectedImage as string}
+              src={selectedAvatar as string}
             />
           </label>
         </div>

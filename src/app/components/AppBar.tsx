@@ -44,6 +44,7 @@ import TypographyJoy from '@mui/joy/Typography';
 // profile
 import Profile from '../components/accaunt/profile/Profile';
 import { clearFormData } from '../redux/slices/formData.slice';
+import { clearAvatar } from '../redux/slices/selectedAvatar.slice';
 
 interface AppBarProps {
   setOpenMeatPizza?: (value: boolean) => void;
@@ -75,6 +76,7 @@ const AppBar: React.FC<AppBarProps> = ({
   const [changeColors, setChangeColors] = useState(false);
   const [changeBackgroundImageTheme, setChangeBackgroundImageTheme] = useState(false);
   const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
+  const selectedAvatar = useSelector((state: any) => state.selectedAvatar.selectedAvatar);
   // ===================================================
 
   const handleOpenMobileMenu = () => {
@@ -198,12 +200,13 @@ const AppBar: React.FC<AppBarProps> = ({
 
   const handleOpenSnackBar = () => {
     setQuitAccauntSnackBar(true);
-    dispatch(clearFormData());
   };
 
   const handleOpenLoginModal = () => {
     setOpenLoginModal(true);
     setQuitAccauntSnackBar(false);
+    dispatch(clearFormData());
+    dispatch(clearAvatar());
   };
 
   const handleClose = () => setOpenLoginModal(false);
@@ -297,7 +300,7 @@ const AppBar: React.FC<AppBarProps> = ({
               cursor: 'pointer',
             }}
             alt="Remy Sharp"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU"
+            src={selectedAvatar as string}
           />
 
           {/* menu  */}
