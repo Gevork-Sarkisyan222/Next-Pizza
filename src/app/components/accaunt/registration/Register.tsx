@@ -10,8 +10,8 @@ import ButtonJoy from '@mui/joy/Button';
 import TypographyJoy from '@mui/joy/Typography';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import { setFormData } from '@/app/redux/slices/formData.slice';
-import { setSelectedAvatar } from '@/app/redux/slices/selectedAvatar.slice';
+import { clearFormData, setFormData } from '@/app/redux/slices/formData.slice';
+import { clearAvatar, setSelectedAvatar } from '@/app/redux/slices/selectedAvatar.slice';
 
 interface PropsRegister {
   handleBackToLogin: () => void;
@@ -49,6 +49,10 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
   const formData = useSelector((state: any) => state.formData.formData);
 
   const [openCreationMessageAndCircular, setOpenCreationMessageAndCircular] = useState(false);
+  const clearReduxStateLogin = () => {
+    dispatch(clearFormData());
+    dispatch(clearAvatar());
+  };
 
   const handleCreateAccaunt = () => {
     for (const field in formData) {
@@ -179,6 +183,7 @@ const Register: React.FC<PropsRegister> = ({ handleBackToLogin }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <BackIcon
           onClick={handleBackToLogin}
+          onClickCapture={clearReduxStateLogin}
           sx={{ position: 'absolute', cursor: 'pointer', color: theme ? 'white' : 'black' }}
         />
         <div className="Avatar-register">

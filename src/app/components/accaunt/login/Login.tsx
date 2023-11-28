@@ -14,7 +14,8 @@ import Stack from '@mui/joy/Stack';
 import ButtonJoy from '@mui/joy/Button';
 import TypographyJoy from '@mui/joy/Typography';
 import Forgot from '../Forgot';
-import { setFormData } from '@/app/redux/slices/formData.slice';
+import { clearFormData, setFormData } from '@/app/redux/slices/formData.slice';
+import { clearAvatar } from '@/app/redux/slices/selectedAvatar.slice';
 
 interface Props {
   handleClose: () => void;
@@ -45,6 +46,8 @@ const Login: React.FC<Props> = ({ handleClose }) => {
   const handleOpenRegister = () => {
     setOpenRegister(true);
     setContent(false);
+    dispatch(clearFormData());
+    dispatch(clearAvatar());
   };
 
   const handleOpenForgot = () => {

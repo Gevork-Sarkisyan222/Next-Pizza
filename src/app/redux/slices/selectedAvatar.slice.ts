@@ -2,7 +2,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-const savedAvatar = localStorage.getItem('selectedAvatar');
+const savedAvatar = typeof window !== 'undefined' ? localStorage.getItem('selectedAvatar') : null;
 
 const initialState = {
   selectedAvatar:

@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/slices/types/type';
@@ -76,7 +74,10 @@ const AppBar: React.FC<AppBarProps> = ({
   const [changeColors, setChangeColors] = useState(false);
   const [changeBackgroundImageTheme, setChangeBackgroundImageTheme] = useState(false);
   const theme = useSelector((state: RootStateTheme) => state.changeTheme.theme);
-  const selectedAvatar = useSelector((state: any) => state.selectedAvatar.selectedAvatar);
+  // const selectedAvatar = useSelector((state: any) => state.selectedAvatar.selectedAvatar);
+  const [selectedAvatar, setSelectedAvatarLocally] = useState<string>(
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU',
+  );
   // ===================================================
 
   const handleOpenMobileMenu = () => {
@@ -207,6 +208,9 @@ const AppBar: React.FC<AppBarProps> = ({
     setQuitAccauntSnackBar(false);
     dispatch(clearFormData());
     dispatch(clearAvatar());
+    setSelectedAvatarLocally(
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU',
+    );
   };
 
   const handleClose = () => setOpenLoginModal(false);
@@ -235,6 +239,13 @@ const AppBar: React.FC<AppBarProps> = ({
     justifyContent: 'center',
     borderRadius: '20px',
   };
+
+  React.useEffect(() => {
+    const savedAvatar = localStorage.getItem('selectedAvatar');
+    if (savedAvatar) {
+      setSelectedAvatarLocally(savedAvatar);
+    }
+  }, []);
 
   return (
     <>

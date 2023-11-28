@@ -18,6 +18,7 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
   const name = useSelector((state: any) => state.formData.formData.name);
   const surname = useSelector((state: any) => state.formData.formData.surname);
   const email = useSelector((state: any) => state.formData.formData.email);
+  const selectedAvatar = useSelector((state: any) => state.selectedAvatar.selectedAvatar);
 
   const handleEdit = () => {
     setEdit(!edit);
@@ -46,7 +47,7 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
               cursor: 'pointer',
             }}
             alt="Remy Sharp"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PxtAWTgOyp0m_7NgdCm3T_9-aU0Zhg47SvX-AaLTU4y0kEvuk-maQdJeTNadSg3rFi0&usqp=CAU"
+            src={selectedAvatar as string}
           />
         </article>
         <div className="nameAndSurname">
