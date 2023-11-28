@@ -4,8 +4,10 @@ import Avatar from '@mui/material/Avatar';
 import PenIcon from '@mui/icons-material/BorderColor';
 import SaveIcon from '@mui/icons-material/SaveAs';
 import LeftArrowIcon from '@mui/icons-material/KeyboardReturn';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStateTheme } from '@/app/redux/slices/types/themeType';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { setSelectedAvatar } from '@/app/redux/slices/selectedAvatar.slice';
 
 interface IProps {
   handleCloseProfile: () => void;
@@ -19,16 +21,36 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
   const surname = useSelector((state: any) => state.formData.formData.surname);
   const email = useSelector((state: any) => state.formData.formData.email);
   const selectedAvatar = useSelector((state: any) => state.selectedAvatar.selectedAvatar);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const handleEdit = () => {
     setEdit(!edit);
+    setEditPenContent(!editPenContent);
   };
 
-  const handleOpenEditPenContent = () => {
-    setEditPenContent(true);
-  };
   const handleCloseEditPenContent = () => {
     setEditPenContent(false);
+  };
+
+  const handleAvatarClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageUrl = event.target?.result;
+        if (imageUrl) {
+          dispatch(setSelectedAvatar(imageUrl as string));
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -40,6 +62,20 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
           </h1>
         </div>
         <article style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="avatar-image-content">
+            {editPenContent && (
+              <button className="edit-pen-buttons-avatar" onClick={handleAvatarClick}>
+                <AddAPhotoIcon />
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleImageChange}
+                  style={{ display: 'none' }}
+                />
+              </button>
+            )}
+          </div>
           <Avatar
             sx={{
               width: '200px',
@@ -83,8 +119,13 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
           <button className="button-orange" onClick={handleEdit}>
             {edit ? (
               <span
-                onClick={handleOpenEditPenContent}
-                style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '3px',
+                  width: '100%',
+                  height: '39px',
+                }}>
                 Редактировать <PenIcon />
               </span>
             ) : (

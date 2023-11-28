@@ -61,5 +61,17 @@
         background: #ff7640;
       }
     }
+
+    .avatar-image-content {
+      position: absolute;
+
+      .edit-pen-buttons-avatar {
+        height: 33px;
+        margin-left: -112px;
+        border-radius: 10px;
+        border: 1px solid orangered;
+        cursor: pointer;
+      }
+    }
   }
 }
