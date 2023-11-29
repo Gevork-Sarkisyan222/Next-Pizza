@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootStateTheme } from '@/app/redux/slices/types/themeType';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { setSelectedAvatar } from '@/app/redux/slices/selectedAvatar.slice';
+import TextField from '@mui/material/TextField';
+import { setFormData } from '@/app/redux/slices/formData.slice';
 
 interface IProps {
   handleCloseProfile: () => void;
@@ -24,9 +26,16 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
+  // open changing inputs
+  const formData = useSelector((state: any) => state.formData.formData);
+  const [inputsToChange, setInputsToChange] = useState(false);
+  const [valueKeeper, setValueKeeper] = useState(true);
+
   const handleEdit = () => {
     setEdit(!edit);
     setEditPenContent(!editPenContent);
+    setInputsToChange(!inputsToChange);
+    setValueKeeper(!valueKeeper);
   };
 
   const handleCloseEditPenContent = () => {
@@ -51,6 +60,16 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch(
+      setFormData({
+        ...formData,
+        [name]: value,
+      }),
+    );
   };
 
   return (
@@ -87,31 +106,63 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
           />
         </article>
         <div className="nameAndSurname">
-          {editPenContent && (
-            <button className="button-pen">
-              <PenIcon />
-            </button>
-          )}
-          <h3 style={{ color: theme ? 'white' : 'black' }}>{name === '' ? 'User' : name}</h3>
-          {editPenContent && (
-            <button className="button-pen">
-              <PenIcon />
-            </button>
-          )}
-          <h3 style={{ color: theme ? 'white' : 'black' }}>{surname === '' ? '2023' : surname}</h3>
-        </div>
-        <div className="email-section">
-          {editPenContent && (
-            <button className="edit-pen-buttons-email">
-              <PenIcon />
-            </button>
+          {inputsToChange && (
+            <TextField
+              sx={{ width: '133px' }}
+              inputProps={{ maxLength: 15 }}
+              name="name"
+              onChange={handleChange}
+              value={formData.name}
+              id="standard-basic"
+              label="изменить имя"
+              variant="standard"
+            />
           )}
 
-          <h3 style={{ color: theme ? 'white' : 'black' }}>
-            {email === '' ? 'почта не указано' : email}
-          </h3>
+          {valueKeeper && (
+            <h3 style={{ color: theme ? 'white' : 'black' }}>{name === '' ? 'User' : name}</h3>
+          )}
+
+          {inputsToChange && (
+            <TextField
+              sx={{ width: '133px' }}
+              inputProps={{ maxLength: 15 }}
+              name="surname"
+              value={formData.surname}
+              onChange={handleChange}
+              id="standard-basic"
+              label="изменить фамилию"
+              variant="standard"
+            />
+          )}
+
+          {valueKeeper && (
+            <h3 style={{ color: theme ? 'white' : 'black' }}>
+              {surname === '' ? '2023' : surname}
+            </h3>
+          )}
         </div>
-        <div style={{ display: 'flex', gap: '20px' }}>
+        <div className="email-section">
+          {inputsToChange && (
+            <TextField
+              sx={{ margin: '17px' }}
+              inputProps={{ maxLength: 25 }}
+              name="email"
+              onChange={handleChange}
+              value={formData.email}
+              id="standard-basic"
+              label="почта"
+              variant="standard"
+            />
+          )}
+
+          {valueKeeper && (
+            <h3 style={{ color: theme ? 'white' : 'black' }}>
+              {email === '' ? 'почта не указано' : email}
+            </h3>
+          )}
+        </div>
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
           <button className="button-orange" onClick={handleCloseProfile}>
             <LeftArrowIcon />
             Закрыть
