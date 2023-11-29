@@ -109,7 +109,9 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
           {inputsToChange && (
             <TextField
               sx={{ width: '133px' }}
-              inputProps={{ maxLength: 15 }}
+              color="warning"
+              InputLabelProps={{ style: { color: theme ? 'white' : 'black' } }}
+              inputProps={{ maxLength: 15, style: { color: theme ? 'white' : 'black' } }}
               name="name"
               onChange={handleChange}
               value={formData.name}
@@ -126,7 +128,9 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
           {inputsToChange && (
             <TextField
               sx={{ width: '133px' }}
-              inputProps={{ maxLength: 15 }}
+              color="warning"
+              InputLabelProps={{ style: { color: theme ? 'white' : 'black' } }}
+              inputProps={{ maxLength: 15, style: { color: theme ? 'white' : 'black' } }}
               name="surname"
               value={formData.surname}
               onChange={handleChange}
@@ -146,7 +150,9 @@ const Profile: React.FC<IProps> = ({ handleCloseProfile }) => {
           {inputsToChange && (
             <TextField
               sx={{ margin: '17px' }}
-              inputProps={{ maxLength: 25 }}
+              color="warning"
+              InputLabelProps={{ style: { color: theme ? 'white' : 'black' } }}
+              inputProps={{ maxLength: 25, style: { color: theme ? 'white' : 'black' } }}
               name="email"
               onChange={handleChange}
               value={formData.email}
